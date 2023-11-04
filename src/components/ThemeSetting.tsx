@@ -5,10 +5,11 @@ import { BsCheck } from "react-icons/bs";
 import { usePersistStore, useUnPersistStore } from "@/stores";
 import themes from "@/configs/theme.config";
 import { Theme } from "@/models/theme.model";
+import useStore from "@/hooks/useStore";
 
 export default function ThemeSetting(): React.ReactElement {
-    const themeMode = usePersistStore((state) => state.themeMode);
-    const themeColor = usePersistStore((state) => state.themeColor);
+    const themeMode = useStore(usePersistStore, (state) => state.themeMode);
+    const themeColor = useStore(usePersistStore, (state) => state.themeColor);
     const setThemeMode = usePersistStore((state) => state.setThemeMode);
     const setThemeColor = usePersistStore((state) => state.setThemeColor);
     const setActiveSetting = useUnPersistStore(

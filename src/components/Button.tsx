@@ -1,4 +1,5 @@
-"use";
+"use client";
+import useStore from "@/hooks/useStore";
 import { ButtonProps } from "@/models/props.model";
 import { usePersistStore } from "@/stores";
 import React from "react";
@@ -9,7 +10,7 @@ export default function Button({
     label,
     borderRadius,
 }: ButtonProps): React.ReactElement {
-    const themeColor = usePersistStore((state) => state.themeColor);
+    const themeColor = useStore(usePersistStore, (state) => state.themeColor);
     return (
         <button
             type="button"

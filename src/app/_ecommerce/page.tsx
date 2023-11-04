@@ -1,8 +1,7 @@
 "use client";
 import Button from "@/components/Button";
-import { usePersistStore } from "@/stores";
 import React from "react";
-import { BsCurrencyDollar, BsBoxSeam } from "react-icons/bs";
+import { BsBoxSeam } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { FiBarChart } from "react-icons/fi";
