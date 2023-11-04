@@ -6,7 +6,7 @@ import {
     SparklineTooltip,
 } from "@syncfusion/ej2-react-charts";
 
-export default function SparkLineChart({
+export default function SparklineChart({
     currentColor,
     id,
     type,

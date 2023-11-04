@@ -6,7 +6,7 @@ import { BsCurrencyDollar, BsBoxSeam } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { FiBarChart } from "react-icons/fi";
-import SparklineChart from "@/components/SparkLineChart";
+import SparklineChart from "@/components/SparklineChart";
 
 export default function Ecommerce() {
     const themeColor = usePersistStore((state) => state.themeColor);
