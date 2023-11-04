@@ -1,8 +1,9 @@
 import { type IconType } from "react-icons";
 
 export interface Route {
-    pathName: string;
-    icon: IconType;
+    path: string;
+    name: string;
+    Icon: IconType;
 }
 export interface SidebarSection {
     title: string;

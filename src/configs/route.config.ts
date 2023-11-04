@@ -9,8 +9,9 @@ const routes: Array<SidebarSection> = [
         title: "Dashboard",
         paths: [
             {
-                pathName: "ecommerce",
-                icon: FiShoppingBag,
+                path: "/",
+                name: "ecommerce",
+                Icon: FiShoppingBag,
             },
         ],
     },
@@ -18,20 +19,24 @@ const routes: Array<SidebarSection> = [
         title: "Pages",
         paths: [
             {
-                pathName: "category",
-                icon: BiCategory,
+                path: "/category",
+                name: "category",
+                Icon: BiCategory,
             },
             {
-                pathName: "product",
-                icon: FiShoppingBag,
+                path: "/product",
+                name: "product",
+                Icon: FiShoppingBag,
             },
             {
-                pathName: "order",
-                icon: AiOutlineShoppingCart,
+                path: "/order",
+                name: "order",
+                Icon: AiOutlineShoppingCart,
             },
             {
-                pathName: "user",
-                icon: RiContactsLine,
+                path: "/user",
+                name: "user",
+                Icon: RiContactsLine,
             },
         ],
     },

@@ -1,9 +1,6 @@
 import React from "react";
+import Ecommerce from "./_ecommerce/page";
 
 export default function Home(): React.ReactElement {
-    return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            Dashboard
-        </main>
-    );
+    return <Ecommerce />;
 }
