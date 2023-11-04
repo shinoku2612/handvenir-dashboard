@@ -1,5 +1,4 @@
 import { IconType } from "react-icons";
-import { type SparklineType } from "@syncfusion/ej2-react-charts";
 
 export interface NavButtonProps {
     onClick: (params?: any) => void;
