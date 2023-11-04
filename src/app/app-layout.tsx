@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import SettingButton from "@/components/SettingButton";
 import Sidebar from "@/components/Sidebar";
 import ThemeSetting from "@/components/ThemeSetting";
+import useStore from "@/hooks/useStore";
 import { usePersistStore, useUnPersistStore } from "@/stores";
 import React from "react";
 
@@ -12,7 +13,8 @@ export default function AppLayout({
     children: React.ReactNode;
 }): React.ReactElement {
     const activeMenu = useUnPersistStore((state) => state.activeMenu);
-    const { themeMode, themeColor } = usePersistStore();
+    const activeSetting = useUnPersistStore((state) => state.activeSetting);
+    const themeMode = useStore(usePersistStore, (state) => state.themeMode);
     return (
         <div className={themeMode}>
             <div className="flex relative dark:bg-main-dark-bg">
@@ -38,7 +40,7 @@ export default function AppLayout({
                     </div>
                     <div>{children}</div>
                 </div>
-                <ThemeSetting />
+                {activeSetting && <ThemeSetting />}
             </div>
         </div>
     );

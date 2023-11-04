@@ -1,17 +1,19 @@
+"use";
 import { ButtonProps } from "@/models/props.model";
+import { usePersistStore } from "@/stores";
 import React from "react";
 
 export default function Button({
     color,
-    backgroundColor,
     size,
     label,
     borderRadius,
-}: ButtonProps) {
+}: ButtonProps): React.ReactElement {
+    const themeColor = usePersistStore((state) => state.themeColor);
     return (
         <button
             type="button"
-            style={{ backgroundColor, color, borderRadius }}
+            style={{ backgroundColor: themeColor, color, borderRadius }}
             className={`text-${size} p-3 hover:drop-shadow-xl`}
         >
             {label}

@@ -28,5 +28,8 @@ export const useUnPersistStore = create<UnPersistState & UnPersistAction>()(
         setActiveMenu: (activeMenu) => set({ activeMenu: activeMenu }),
         toogleActive: (callback) =>
             set({ activeMenu: callback(get().activeMenu) }),
+        activeSetting: false,
+        setActiveSetting: (activeSetting) =>
+            set({ activeSetting: activeSetting }),
     }),
 );

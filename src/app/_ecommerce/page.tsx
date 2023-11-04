@@ -6,10 +6,8 @@ import { BsCurrencyDollar, BsBoxSeam } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { FiBarChart } from "react-icons/fi";
-import SparklineChart from "@/components/SparklineChart";
 
 export default function Ecommerce() {
-    const themeColor = usePersistStore((state) => state.themeColor);
     return (
         <div className="mt-12">
             <div className="flex flex-wrap lg:flex-nowrap justify-center">
@@ -28,7 +26,6 @@ export default function Ecommerce() {
                     <div className="mt-6">
                         <Button
                             color="white"
-                            backgroundColor={themeColor}
                             label="Download"
                             borderRadius="10px"
                             size="md"
@@ -86,7 +83,7 @@ export default function Ecommerce() {
                                 +4%
                             </span>
                         </p>
-                        <p className="text-sm text-gray-400 mt-1">Customers</p>
+                        <p className="text-sm text-gray-400 mt-1">Products</p>
                     </div>
                     <div
                         className="bg-white dark:text-gray-200
@@ -112,7 +109,7 @@ export default function Ecommerce() {
                                 +4%
                             </span>
                         </p>
-                        <p className="text-sm text-gray-400 mt-1">Customers</p>
+                        <p className="text-sm text-gray-400 mt-1">Sales</p>
                     </div>
                 </div>
             </div>
@@ -172,22 +169,12 @@ export default function Ecommerce() {
                                 </p>
                                 <p className="text-gray-500 mt-1">Expense</p>
                             </div>
-
-                            <div className="mt-5">
-                                <SparklineChart
-                                    currentColor={themeColor}
-                                    id="line-sparkline"
-                                    type="Line"
-                                    width="250px"
-                                    height="80px"
-                                    data={[
-                                        { x: 1, y: 2 },
-                                        { x: 2, y: 6 },
-                                        { x: 3, y: 8 },
-                                        { x: 4, y: 5 },
-                                        { x: 5, y: 10 },
-                                    ]}
-                                    color={themeColor}
+                            <div className="mt-10">
+                                <Button
+                                    color="white"
+                                    label="Download Report"
+                                    borderRadius="10px"
+                                    size="md"
                                 />
                             </div>
                         </div>

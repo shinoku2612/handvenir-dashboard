@@ -10,7 +10,7 @@ import useStore from "@/hooks/useStore";
 
 export default function Sidebar(): React.ReactElement {
     const activeMenu = useUnPersistStore((state) => state.activeMenu);
-    const themeColor = usePersistStore((state) => state.themeColor);
+    const themeColor = useStore(usePersistStore, (state) => state.themeColor);
     const setActiveMenu = useUnPersistStore((state) => state.setActiveMenu);
     const screenWidth = usePersistStore((state) => state.screenWidth);
     const pathname = usePathname();

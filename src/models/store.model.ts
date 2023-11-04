@@ -11,10 +11,12 @@ type PersistAction = {
 
 type UnPersistState = {
     activeMenu: boolean;
+    activeSetting: boolean;
 };
 type UnPersistAction = {
     setActiveMenu: (activeMenu: UnPersistState["activeMenu"]) => void;
     toogleActive: (callback: (state: boolean) => boolean) => void;
+    setActiveSetting: (activeSetting: UnPersistState["activeSetting"]) => void;
 };
 
 export type { PersistState, PersistAction, UnPersistState, UnPersistAction };

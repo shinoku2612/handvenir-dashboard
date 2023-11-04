@@ -1,6 +1,6 @@
 import { Theme } from "@/models/theme.model";
 
-const theme: Array<Theme> = [
+const themes: Array<Theme> = [
     {
         name: "blue-theme",
         color: "#1A97F5",
@@ -22,8 +22,8 @@ const theme: Array<Theme> = [
         color: "#1E4DB7",
     },
     {
-        color: "#FB9678",
         name: "orange-theme",
+        color: "#FB9678",
     },
 ];
-export default theme;
+export default themes;
