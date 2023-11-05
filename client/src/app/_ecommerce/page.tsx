@@ -1,10 +1,10 @@
-"use client";
 import Button from "@/components/Button";
 import React from "react";
 import { BsBoxSeam } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { FiBarChart } from "react-icons/fi";
+import Widget from "@/components/Widget";
 
 export default function Ecommerce() {
     return (
@@ -32,84 +32,33 @@ export default function Ecommerce() {
                     </div>
                 </div>
                 <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
-                    <div
-                        className="bg-white dark:text-gray-200
-                    dark:bg-secondary-dark-bg
-                    md:w-56 p-4 pt-9 rounded-2xl"
-                    >
-                        <button
-                            type="button"
-                            style={{
-                                color: "#03C9D7",
-                                backgroundColor: "#E5FAFB",
-                            }}
-                            className="text-2xl opacity-[0.9] rounded-full p-4
-                            hover:drop-shadow-xl"
-                        >
-                            <MdOutlineSupervisorAccount />
-                        </button>
-                        <p className="mt-3">
-                            <span className="text-lg font-semibold">
-                                12.345
-                            </span>
-                            <span className="text-sm text-green-600 ml-2">
-                                +4%
-                            </span>
-                        </p>
-                        <p className="text-sm text-gray-400 mt-1">Customers</p>
-                    </div>
-                    <div
-                        className="bg-white dark:text-gray-200
-                    dark:bg-secondary-dark-bg
-                    md:w-56 p-4 pt-9 rounded-2xl"
-                    >
-                        <button
-                            type="button"
-                            style={{
-                                color: "rgb(255, 244, 229)",
-                                backgroundColor: "rgb(254, 201, 15)",
-                            }}
-                            className="text-2xl opacity-[0.9] rounded-full p-4
-                            hover:drop-shadow-xl"
-                        >
-                            <BsBoxSeam />
-                        </button>
-                        <p className="mt-3">
-                            <span className="text-lg font-semibold">
-                                12.345
-                            </span>
-                            <span className="text-sm text-green-600 ml-2">
-                                +4%
-                            </span>
-                        </p>
-                        <p className="text-sm text-gray-400 mt-1">Products</p>
-                    </div>
-                    <div
-                        className="bg-white dark:text-gray-200
-                    dark:bg-secondary-dark-bg
-                    md:w-56 p-4 pt-9 rounded-2xl"
-                    >
-                        <button
-                            type="button"
-                            style={{
-                                color: "rgb(228, 106, 118)",
-                                backgroundColor: "rgb(255, 244, 229)",
-                            }}
-                            className="text-2xl opacity-[0.9] rounded-full p-4
-                            hover:drop-shadow-xl"
-                        >
-                            <FiBarChart />
-                        </button>
-                        <p className="mt-3">
-                            <span className="text-lg font-semibold">
-                                12.345
-                            </span>
-                            <span className="text-sm text-green-600 ml-2">
-                                +4%
-                            </span>
-                        </p>
-                        <p className="text-sm text-gray-400 mt-1">Sales</p>
-                    </div>
+                    <Widget
+                        color="#03C9D7"
+                        backgroundColor="#E5FAFB"
+                        Icon={MdOutlineSupervisorAccount}
+                        amount={12_345}
+                        difference={4}
+                        type="increased"
+                        label="Users"
+                    />
+                    <Widget
+                        color="rgb(255, 244, 229)"
+                        backgroundColor="rgb(254, 201, 15)"
+                        Icon={BsBoxSeam}
+                        amount={3_456}
+                        difference={5}
+                        type="decreased"
+                        label="Products"
+                    />
+                    <Widget
+                        color="rgb(228, 106, 118)"
+                        backgroundColor="rgb(255, 244, 229)"
+                        Icon={FiBarChart}
+                        amount={2_468}
+                        difference={12}
+                        type="increased"
+                        label="Sales"
+                    />
                 </div>
             </div>
 
@@ -124,7 +73,7 @@ export default function Ecommerce() {
                         <div className="flex items-center gap-4">
                             <p
                                 className="flex items-center gap-2
-                            text-gray-600 hover:drop-shadow-xl"
+                            text-gray-400 hover:drop-shadow-xl"
                             >
                                 <span>
                                     <GoDotFill />
@@ -158,7 +107,7 @@ export default function Ecommerce() {
                                         12%
                                     </span>
                                 </p>
-                                <p className="text-gray-500 mt-1">Budget</p>
+                                <p className="text-gray-400 mt-1">Budget</p>
                             </div>
                             <div className="mt-8">
                                 <p>
@@ -166,7 +115,7 @@ export default function Ecommerce() {
                                         $6.123
                                     </span>
                                 </p>
-                                <p className="text-gray-500 mt-1">Expense</p>
+                                <p className="text-gray-400 mt-1">Expense</p>
                             </div>
                             <div className="mt-10">
                                 <Button

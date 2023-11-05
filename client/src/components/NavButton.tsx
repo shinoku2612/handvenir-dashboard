@@ -3,7 +3,7 @@ import { NavButtonProps } from "@/models/props.model";
 export default function NavButton({
     onClick,
     Icon,
-    color,
+    color = "#1A97F5",
     dotColor,
 }: NavButtonProps): React.ReactElement {
     return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const useStore = <T, F>(
     store: (callback: (state: T) => unknown) => unknown,
@@ -10,6 +10,8 @@ const useStore = <T, F>(
     useEffect(() => {
         setData(result);
     }, [result]);
-    return data;
+
+    const value = useMemo(() => data, [data]);
+    return value;
 };
 export default useStore;

@@ -6,11 +6,13 @@ import { BsChatLeft } from "react-icons/bs";
 import { RiNotification3Line } from "react-icons/ri";
 import { usePersistStore, useUnPersistStore } from "@/stores";
 import NavButton from "./NavButton";
+import useStore from "@/hooks/useStore";
 
 export default function Navbar(): React.ReactElement {
     const toogleActive = useUnPersistStore((state) => state.toogleActive);
     const setActiveMenu = useUnPersistStore((state) => state.setActiveMenu);
     const screenWidth = usePersistStore((state) => state.screenWidth);
+    const themeColor = useStore(usePersistStore, (state) => state.themeColor);
     const setScreenWidth = usePersistStore((state) => state.setScreenWidth);
     useEffect(() => {
         const handleResize = () => setScreenWidth(window.innerWidth);
@@ -28,25 +30,25 @@ export default function Navbar(): React.ReactElement {
         <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
             <NavButton
                 onClick={() => toogleActive((prev: boolean) => !prev)}
-                color="red"
+                color={themeColor}
                 Icon={AiOutlineMenu}
             />
             <div className="flex">
                 <NavButton
                     onClick={() => {}}
-                    color="red"
+                    color={themeColor}
                     Icon={FiShoppingCart}
                 />
                 <NavButton
                     dotColor="#03C9D7"
                     onClick={() => {}}
-                    color="red"
+                    color={themeColor}
                     Icon={BsChatLeft}
                 />
                 <NavButton
                     dotColor="rgb(254, 201, 15)"
                     onClick={() => {}}
-                    color="red"
+                    color={themeColor}
                     Icon={RiNotification3Line}
                 />
             </div>
