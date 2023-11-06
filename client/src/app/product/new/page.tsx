@@ -8,7 +8,7 @@ import ImagePreview from "@/components/ImagePreview";
 import { usePersistStore } from "@/stores";
 
 const getCategories = async (url: string) => {
-    const response = await fetch(url);
+    const response = await fetch(url, { next: { revalidate: 30 } });
     const data = await response.json();
     return data;
 };
