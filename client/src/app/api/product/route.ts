@@ -1,14 +1,17 @@
 import ProductModel from "@/databases/product.model";
 import { NextRequest, NextResponse } from "next/server";
-import "@/libs/mongodb";
 
 export async function GET(request: NextRequest) {
     try {
-        const products = await ProductModel.find();
+        const products = await ProductModel.find({}).select([
+            "-createdAt",
+            "-updatedAt",
+            "-slug",
+            "-__v",
+        ]);
         return NextResponse.json(products);
     } catch (error) {
-        console.log("Error");
-        return NextResponse.json("Cannot get products");
+        return new NextResponse(JSON.stringify(error), { status: 500 });
     }
 }
 export async function POST(request: NextRequest) {
