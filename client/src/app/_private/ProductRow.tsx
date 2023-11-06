@@ -32,7 +32,7 @@ export default function RowItem({
             </th>
             <td className="px-6 py-4">{data.description}</td>
             <td className="px-6 py-4">{data.categories.join(", ")}</td>
-            <td className="px-6 py-4">{data.rating}</td>
+            <td className="px-6 py-4">{data.rating ?? 0}</td>
             <td className="px-6 py-4">${data.price}</td>
             <td className="px-6 py-4">
                 <div className=" flex items-center">

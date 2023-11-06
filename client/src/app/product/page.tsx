@@ -37,7 +37,7 @@ export default async function Product(): Promise<React.ReactElement> {
             <SearchBar />
 
             <div className="mt-4">
-                {/* <DataTable
+                <DataTable
                     headers={[
                         "",
                         "Product",
@@ -49,8 +49,7 @@ export default async function Product(): Promise<React.ReactElement> {
                     ]}
                     renderData={products}
                     RowItem={RowItem}
-                /> */}
-                {products?.toString()}
+                />
             </div>
         </div>
     );
