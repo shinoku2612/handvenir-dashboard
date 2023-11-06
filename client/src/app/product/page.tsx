@@ -6,7 +6,7 @@ import React from "react";
 import SearchBar from "@/components/SearchBar";
 import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
-import RowItem from "@/components/ProductRow";
+import RowItem from "@/app/_private/ProductRow";
 
 export const metadata: Metadata = {
     title: "Product",
