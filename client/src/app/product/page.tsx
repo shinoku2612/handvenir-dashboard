@@ -20,7 +20,6 @@ export default async function Product(): Promise<React.ReactElement> {
         },
     );
     const products: Array<Product> = await response.json();
-    console.log(products)
     return (
         <div className="m-2 mt-16 md:m-10 md:mt-7 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
             <div className="flex items-center justify-between">
@@ -38,7 +37,7 @@ export default async function Product(): Promise<React.ReactElement> {
             <SearchBar />
 
             <div className="mt-4">
-                <DataTable
+                {/* <DataTable
                     headers={[
                         "",
                         "Product",
@@ -50,7 +49,8 @@ export default async function Product(): Promise<React.ReactElement> {
                     ]}
                     renderData={products}
                     RowItem={RowItem}
-                />
+                /> */}
+                {products.join(", ")}
             </div>
         </div>
     );
