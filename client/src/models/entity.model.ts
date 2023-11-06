@@ -6,7 +6,6 @@ export interface Product {
     categories: Array<string>;
     rating?: number;
     price: number;
-    slug?: string;
 }
 export interface Category {
     _id?: string;
