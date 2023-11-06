@@ -7,8 +7,7 @@ export async function GET(request: NextRequest) {
         ClientConnector.useDb("Categories");
         const categories = await CategoryModel.find(
             {},
-            { createdAt: -1, updatedAt: -1 },
-        );
+        ).select(["-createdAt", "-updatedAt"]);
         return NextResponse.json(categories);
     } catch (error) {
         return NextResponse.json(error);
