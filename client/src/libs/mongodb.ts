@@ -26,5 +26,5 @@ function createConnection(connectionString: string): mongoose.Connection {
     });
     return connector;
 }
-export const AdminConnector = createConnection(process.env.MONGO_ADMIN_URI!);
+// export const AdminConnector = createConnection(process.env.MONGO_ADMIN_URI!);
 export const ClientConnector = createConnection(process.env.MONGO_CLIENT_URI!);
