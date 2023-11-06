@@ -50,7 +50,7 @@ export default async function Product(): Promise<React.ReactElement> {
                     renderData={products}
                     RowItem={RowItem}
                 /> */}
-                {products.join(", ")}
+                {/* {products.join(", ")} */}
             </div>
         </div>
     );
