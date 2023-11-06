@@ -4,7 +4,7 @@ export interface Product {
     title: string;
     description: string;
     categories: Array<string>;
-    rating?: number;
+    rating: { count: number; point: number };
     price: number;
 }
 export interface Category {
