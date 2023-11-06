@@ -13,9 +13,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Product(): Promise<React.ReactElement> {
-    const response = await fetch(`${process.env.APP_DOMAIN}/api/product/`, {
-        cache: "no-store",
-    });
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_DOMAIN}/api/product/`,
+        {
+            cache: "no-store",
+        },
+    );
     const products: Array<Product> = await response.json();
     return (
         <div className="m-2 mt-16 md:m-10 md:mt-7 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
