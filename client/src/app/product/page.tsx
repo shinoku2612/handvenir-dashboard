@@ -13,13 +13,13 @@ export const metadata: Metadata = {
 };
 
 export default async function Product(): Promise<React.ReactElement> {
-    // const response = await fetch(
-    //     `${process.env.NEXT_PUBLIC_APP_DOMAIN}/api/product/`,
-    //     {
-    //         cache: "no-store",
-    //     },
-    // );
-    // const products: Array<Product> = await response.json();
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/product/`,
+        {
+            cache: "no-store",
+        },
+    );
+    const products: Array<Product> = await response.json();
     return (
         <div className="m-2 mt-16 md:m-10 md:mt-7 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
             <div className="flex items-center justify-between">
@@ -47,17 +47,7 @@ export default async function Product(): Promise<React.ReactElement> {
                         "Price",
                         "Actions",
                     ]}
-                    renderData={[
-                        {
-                            _id: "64fa0dbc92fbd5031b8e8cfc",
-                            title: "Dreamcatcher",
-                            image: "https://img.fruugo.com/product/4/26/191506264_max.jpg",
-                            price: 2.5,
-                            description:
-                                "Diameter: 6cm\nMaterial: iron\nColor: red",
-                            categories: ["dreamcatcher"],
-                        },
-                    ]}
+                    renderData={products}
                     RowItem={RowItem}
                 />
             </div>
