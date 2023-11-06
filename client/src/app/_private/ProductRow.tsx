@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Product } from "@/models/entity.model";
 import Image from "next/image";
@@ -9,6 +10,7 @@ export default function RowItem({
 }: {
     data: Product;
 }): React.ReactElement {
+    console.log(data);
     return (
         <tr
             className="bg-white even:bg-light-gray border-b
