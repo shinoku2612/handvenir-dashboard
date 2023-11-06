@@ -4,7 +4,7 @@
 
 @layer components {
   .active-link {
-    @apply flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-sm m-2 font-semibold
+    @apply flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-sm m-2 font-semibold bg-[#1A97F5]
   }
 
   .normal-link {

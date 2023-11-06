@@ -4,6 +4,8 @@ import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { Category } from "@/models/entity.model";
+import ImagePreview from "@/components/ImagePreview";
+import { usePersistStore } from "@/stores";
 
 const getCategories = async (url: string) => {
     const response = await fetch(url);
@@ -12,6 +14,7 @@ const getCategories = async (url: string) => {
 };
 
 export default function NewProductPage(): React.ReactElement {
+    const themeColor = usePersistStore((state) => state.themeColor);
     const { replace } = useRouter();
     const { data, isLoading } = useSWR<Category[]>(
         "/api/category",
@@ -21,7 +24,8 @@ export default function NewProductPage(): React.ReactElement {
     const nameRef = useRef<HTMLInputElement>(null);
     const priceRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLTextAreaElement>(null);
-    const [image, setImage] = useState<File | Blob>();
+    const [previewImage, setPreviewImage] = useState<File | Blob>();
+    const [productImage, setProductImage] = useState<File | Blob>();
     const [categories, setCategories] = useState<string[]>([]);
 
     const handleAddProduct = async (event: FormEvent) => {
@@ -33,7 +37,7 @@ export default function NewProductPage(): React.ReactElement {
                     title: nameRef.current?.value,
                     price: parseFloat(priceRef.current?.value!),
                     description: descriptionRef.current?.value,
-                    image,
+                    image: productImage,
                     categories,
                 }),
             });
@@ -140,6 +144,7 @@ export default function NewProductPage(): React.ReactElement {
                         ))}
                     </ul>
                 </div>
+                {previewImage ? <ImagePreview source={previewImage} /> : null}
                 <div className="flex items-center justify-center w-full mt-6">
                     <label
                         htmlFor="dropzoneFile"
@@ -173,7 +178,9 @@ export default function NewProductPage(): React.ReactElement {
                         <input
                             id="dropzoneFile"
                             type="file"
-                            onChange={(e) => setImage(e.target.files?.[0])}
+                            onChange={(e) =>
+                                setPreviewImage(e.target.files?.[0])
+                            }
                             className="hidden"
                         />
                     </label>
@@ -181,7 +188,10 @@ export default function NewProductPage(): React.ReactElement {
 
                 <button
                     type="submit"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mt-6 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mt-6 text-center dark:focus:ring-blue-800"
+                    style={{
+                        backgroundColor: themeColor,
+                    }}
                 >
                     Add
                 </button>

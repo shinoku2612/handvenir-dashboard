@@ -12,6 +12,7 @@ export interface ButtonProps {
     label: string;
     borderRadius: string;
     size: string;
+    onClick?: (params: any) => void;
 }
 export interface HeaderProps {
     category: string;
@@ -30,4 +31,7 @@ export interface WidgetProps {
     amount: number;
     difference: number;
     Icon: IconType;
+}
+export interface ImagePreviewProps {
+    source: File | Blob;
 }

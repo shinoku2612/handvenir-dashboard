@@ -20,7 +20,7 @@ export default function SettingButton(): React.ReactElement {
                     backgroundColor: themColor,
                     borderRadius: "50%",
                 }}
-                className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
+                className="text-3xl text-white p-3 hover:drop-shadow-xl bg-[#1A97F5]"
                 onClick={() => setActiveSetting(true)}
             >
                 <FiSettings />
