@@ -10,7 +10,7 @@ const nextConfig = {
             },
         ],
     },
-    // trailingSlash: false,
+    trailingSlash: false,
 };
 
 module.exports = nextConfig;
