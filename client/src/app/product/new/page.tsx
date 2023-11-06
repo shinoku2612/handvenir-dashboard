@@ -14,7 +14,7 @@ const getCategories = async (url: string) => {
 export default function NewProductPage(): React.ReactElement {
     const { replace } = useRouter();
     const { data, isLoading } = useSWR<Category[]>(
-        "http://localhost:3000/api/category",
+        "/api/category",
         getCategories,
     );
 
