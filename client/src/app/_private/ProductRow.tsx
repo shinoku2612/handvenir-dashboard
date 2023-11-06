@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiEdit, BiTrash } from "react-icons/bi";
 
-export default function RowItem({
+export default function ProductRow({
     data,
 }: {
     data: Product;
@@ -34,7 +34,7 @@ export default function RowItem({
             </th>
             <td className="px-6 py-4">{data.description}</td>
             <td className="px-6 py-4">{data.categories.join(", ")}</td>
-            <td className="px-6 py-4">{data.rating.point}</td>
+            <td className="px-6 py-4">{data.rating ?? 0}</td>
             <td className="px-6 py-4">${data.price}</td>
             <td className="px-6 py-4">
                 <div className=" flex items-center">

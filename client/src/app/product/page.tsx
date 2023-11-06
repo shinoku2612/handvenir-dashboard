@@ -6,19 +6,16 @@ import React from "react";
 import SearchBar from "@/components/SearchBar";
 import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
-import RowItem from "@/app/_private/ProductRow";
+import ProductRow from "@/app/_private/ProductRow";
 
 export const metadata: Metadata = {
     title: "Product",
 };
 
 export default async function Product(): Promise<React.ReactElement> {
-    const response = await fetch(
-        `${process.env.APP_DOMAIN}/api/product/`,
-        {
-            cache: "no-store",
-        },
-    );
+    const response = await fetch(`${process.env.APP_DOMAIN}/api/product/`, {
+        cache: "no-store",
+    });
     const products: Array<Product> = await response.json();
     return (
         <div className="m-2 mt-16 md:m-10 md:mt-7 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
@@ -48,7 +45,7 @@ export default async function Product(): Promise<React.ReactElement> {
                         "Actions",
                     ]}
                     renderData={products}
-                    RowItem={RowItem}
+                    RowItem={ProductRow}
                 />
             </div>
         </div>
