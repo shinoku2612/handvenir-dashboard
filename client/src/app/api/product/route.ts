@@ -1,5 +1,6 @@
 import ProductModel from "@/databases/product.model";
 import { NextRequest, NextResponse } from "next/server";
+import "@/libs/mongodb";
 
 export async function GET(request: NextRequest) {
     try {

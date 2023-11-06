@@ -1,5 +1,6 @@
 import CategoryModel from "@/databases/category.model";
 import { NextRequest, NextResponse } from "next/server";
+import "@/libs/mongodb";
 
 export async function GET(request: NextRequest) {
     try {
