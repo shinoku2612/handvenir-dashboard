@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Product(): Promise<React.ReactElement> {
-    const response = await fetch(`${process.env.APP_DOMAIN}/api/product`, {
+    const response = await fetch(`${process.env.APP_DOMAIN}/api/product/`, {
         cache: "no-store",
     });
     const products: Array<Product> = await response.json();
