@@ -6,7 +6,6 @@ import React, { useEffect, useRef } from "react";
 
 function ImagePreview({ source }: ImagePreviewProps): React.ReactElement {
     const screenWidth = usePersistStore((state) => state.screenWidth);
-    const themeColor = usePersistStore((state) => state.themeColor);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
     const createCropMask = () => {
@@ -30,7 +29,6 @@ function ImagePreview({ source }: ImagePreviewProps): React.ReactElement {
         }
     };
 
-    console.log(screenWidth);
     const handleCropImage = () => {};
 
     useEffect(() => {
@@ -59,16 +57,6 @@ function ImagePreview({ source }: ImagePreviewProps): React.ReactElement {
                     onLoad={() => createCropMask()}
                 />
             </div>
-            <button
-                type="button"
-                className="text-white px-6 py-2 mt-4 bg-gray-200 rounded-lg font-semibold focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-                onClick={handleCropImage}
-                style={{
-                    backgroundColor: themeColor,
-                }}
-            >
-                Crop
-            </button>
         </div>
     );
 }

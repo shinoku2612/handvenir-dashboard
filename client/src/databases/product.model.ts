@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 import { ClientConnector } from "@/libs/mongodb";
-import URLSlug from "mongoose-slug-generator";
-ClientConnector.plugin(URLSlug);
 
 const ProductSchema = new mongoose.Schema(
     {
@@ -9,7 +7,7 @@ const ProductSchema = new mongoose.Schema(
         image: { type: String, required: true },
         price: { type: Number, required: true },
         description: { type: String, required: true },
-        slug: { type: String, slug: "title", unique: true },
+        slug: { type: String, unique: true },
         categories: { type: Array, default: [] },
     },
     { timestamps: true },

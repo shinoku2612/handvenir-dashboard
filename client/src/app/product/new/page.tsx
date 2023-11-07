@@ -1,59 +1,31 @@
-"use client";
-import React, { FormEvent, useRef, useState } from "react";
+import React from "react";
 import Header from "@/components/Header";
-import { useRouter } from "next/navigation";
-import useSWR from "swr";
-import { Category } from "@/models/entity.model";
+import { Category, Product } from "@/models/entity.model";
 import ImagePreview from "@/components/ImagePreview";
-import { usePersistStore } from "@/stores";
+import Loader from "@/components/Loader";
+import { redirect } from "next/navigation";
 
-const getCategories = async (url: string) => {
-    const response = await fetch(url, { next: { revalidate: 30 } });
+const getCategories = async (url: string): Promise<Category[]> => {
+    const response = await fetch(url);
     const data = await response.json();
     return data;
 };
 
-export default function NewProductPage(): React.ReactElement {
-    const themeColor = usePersistStore((state) => state.themeColor);
-    const { replace } = useRouter();
-    const { data, isLoading } = useSWR<Category[]>(
-        "/api/category",
-        getCategories,
+export default async function NewProductPage(): Promise<React.ReactElement> {
+    const categories = await getCategories(
+        `${process.env.APP_DOMAIN}/api/category`,
     );
 
-    const nameRef = useRef<HTMLInputElement>(null);
-    const priceRef = useRef<HTMLInputElement>(null);
-    const descriptionRef = useRef<HTMLTextAreaElement>(null);
-    const [previewImage, setPreviewImage] = useState<File | Blob>();
-    const [productImage, setProductImage] = useState<File | Blob>();
-    const [categories, setCategories] = useState<string[]>([]);
+    async function handleAddProduct(formData: FormData) {
+        "use server";
 
-    const handleAddProduct = async (event: FormEvent) => {
-        try {
-            event.preventDefault();
-            await fetch("http://localhost:3000/api/product", {
-                method: "POST",
-                body: JSON.stringify({
-                    title: nameRef.current?.value,
-                    price: parseFloat(priceRef.current?.value!),
-                    description: descriptionRef.current?.value,
-                    image: productImage,
-                    categories,
-                }),
-            });
-            replace("/product");
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const handleSelect = (value: string) => {
-        setCategories((prev) => {
-            if (prev.includes(value)) return prev.filter((v) => v !== value);
-            return prev.concat([value]);
+        const response = await fetch(`${process.env.APP_DOMAIN}/api/product`, {
+            method: "POST",
+            body: formData,
         });
-    };
-    if (isLoading) return <h3>Loading...</h3>;
+        if (response.ok) redirect("/product");
+    }
+
     return (
         <div className="m-2 mt-16 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
             <div className="flex items-center justify-between">
@@ -62,7 +34,7 @@ export default function NewProductPage(): React.ReactElement {
                     title="Add product"
                 />
             </div>
-            <form onSubmit={handleAddProduct}>
+            <form action={handleAddProduct}>
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label
@@ -73,8 +45,8 @@ export default function NewProductPage(): React.ReactElement {
                         </label>
                         <input
                             type="text"
-                            ref={nameRef}
                             id="productName"
+                            name="title"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Product name"
                             required
@@ -90,7 +62,7 @@ export default function NewProductPage(): React.ReactElement {
                         <input
                             type="number"
                             id="price"
-                            ref={priceRef}
+                            name="price"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="99.99"
                             step="any"
@@ -107,7 +79,7 @@ export default function NewProductPage(): React.ReactElement {
                     </label>
                     <textarea
                         id="message"
-                        ref={descriptionRef}
+                        name="description"
                         rows={4}
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Write some descriptions for this product..."
@@ -118,7 +90,7 @@ export default function NewProductPage(): React.ReactElement {
                         Categories
                     </p>
                     <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        {data?.map((category) => (
+                        {categories?.map((category) => (
                             <li
                                 key={category._id}
                                 className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
@@ -127,11 +99,10 @@ export default function NewProductPage(): React.ReactElement {
                                     <input
                                         id={category.slug}
                                         name="categories"
+                                        value={category.slug}
+                                        multiple
                                         type="checkbox"
                                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                                        onChange={() =>
-                                            handleSelect(category.slug)
-                                        }
                                     />
                                     <label
                                         htmlFor={category.slug}
@@ -144,7 +115,7 @@ export default function NewProductPage(): React.ReactElement {
                         ))}
                     </ul>
                 </div>
-                {previewImage ? <ImagePreview source={previewImage} /> : null}
+                {/* {previewImage ? <ImagePreview source={previewImage} /> : null} */}
                 <div className="flex items-center justify-center w-full mt-6">
                     <label
                         htmlFor="dropzoneFile"
@@ -178,9 +149,7 @@ export default function NewProductPage(): React.ReactElement {
                         <input
                             id="dropzoneFile"
                             type="file"
-                            onChange={(e) =>
-                                setPreviewImage(e.target.files?.[0])
-                            }
+                            name="image"
                             className="hidden"
                         />
                     </label>
@@ -189,9 +158,6 @@ export default function NewProductPage(): React.ReactElement {
                 <button
                     type="submit"
                     className="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mt-6 text-center dark:focus:ring-blue-800"
-                    style={{
-                        backgroundColor: themeColor,
-                    }}
                 >
                     Add
                 </button>

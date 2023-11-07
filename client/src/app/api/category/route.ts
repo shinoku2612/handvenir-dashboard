@@ -4,10 +4,10 @@ import { ClientConnector } from "@/libs/mongodb";
 
 export async function GET(request: NextRequest) {
     try {
-        ClientConnector.useDb("Categories");
-        const categories = await CategoryModel.find(
-            {},
-        ).select(["-createdAt", "-updatedAt"]);
+        const categories = await CategoryModel.find().select([
+            "-createdAt",
+            "-updatedAt",
+        ]);
         return NextResponse.json(categories);
     } catch (error) {
         return NextResponse.json(error);
