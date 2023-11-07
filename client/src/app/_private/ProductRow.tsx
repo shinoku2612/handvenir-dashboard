@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useRef } from "react";
 import { Product } from "@/models/entity.model";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,7 @@ export default function ProductRow({
 }: {
     data: Product;
 }): React.ReactElement {
+    const retryRef = useRef<number>(0);
     return (
         <tr
             className="bg-white even:bg-light-gray border-b
@@ -22,6 +24,16 @@ export default function ProductRow({
                     height={128}
                     priority
                     className="object-center object-cover w-auto h-auto"
+                    onError={(e) => {
+                        retryRef.current++;
+                        if (retryRef.current < 2) {
+                            const timerId = setTimeout(() => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = data.image;
+                                clearTimeout(timerId);
+                            }, 500);
+                        }
+                    }}
                 />
             </td>
             <th
