@@ -32,10 +32,11 @@ export async function uploadFile(
             });
         });
         const imageArrayBuffer: ArrayBuffer = await file.arrayBuffer();
-        const imageBuffer: Uint8Array = new Uint8Array(imageArrayBuffer);
+        const imageBuffer: Buffer = Buffer.from(imageArrayBuffer);
 
         const bufferStream: PassThrough = new PassThrough();
-        bufferStream.end(imageBuffer);
+        bufferStream.write(imageBuffer);
+        bufferStream.end();
 
         const result: GaxiosResponse<drive_v3.Schema$File> =
             await drive.files.create({
