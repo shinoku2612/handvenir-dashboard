@@ -2,6 +2,7 @@ import googleDrive from "@/configs/googleapi.config";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3, google } from "googleapis";
 import stream, { PassThrough } from "stream";
+import fs from "fs";
 
 const oauth2Client = new google.auth.OAuth2(
     googleDrive.clientId,
@@ -31,8 +32,16 @@ export async function uploadFile(
                 fileId: file.id!,
             });
         });
-        const imageArrayBuffer: ArrayBuffer = await file.arrayBuffer();
-        const imageBuffer: Buffer = Buffer.from(imageArrayBuffer);
+
+        let imageBuffer: Buffer;
+        if (file instanceof File) {
+            const imageArrayBuffer: ArrayBuffer = await file.arrayBuffer();
+            imageBuffer = Buffer.from(imageArrayBuffer);
+        } else if (file instanceof Blob) {
+            imageBuffer = await blobToBuffer(file);
+        } else {
+            throw new Error("Unsupported file type");
+        }
 
         const bufferStream: PassThrough = new PassThrough();
         bufferStream.end(imageBuffer);
@@ -62,4 +71,18 @@ export async function uploadFile(
     } catch (error) {
         return error as drive_v3.Schema$File;
     }
+}
+
+async function blobToBuffer(blob: Blob): Promise<Buffer> {
+    return new Promise<Buffer>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            if (reader.readyState === FileReader.DONE) {
+                const buffer = Buffer.from(reader.result as ArrayBuffer);
+                resolve(buffer);
+            }
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(blob);
+    });
 }
