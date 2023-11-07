@@ -32,7 +32,7 @@ export async function uploadFile(
             });
         });
         const imageArrayBuffer: ArrayBuffer = await file.arrayBuffer();
-        const imageBuffer: Buffer = Buffer.from(imageArrayBuffer);
+        const imageBuffer: Uint8Array = new Uint8Array(imageArrayBuffer);
 
         const bufferStream: PassThrough = new PassThrough();
         bufferStream.write(imageBuffer);
