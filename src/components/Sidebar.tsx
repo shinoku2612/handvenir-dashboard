@@ -47,11 +47,12 @@ export default function Sidebar(): React.ReactElement {
                                 key={path}
                                 href={path}
                                 style={{
-                                    backgroundColor:
-                                        pathname === path ? themeColor : "",
+                                    backgroundColor: pathname.includes(path)
+                                        ? themeColor
+                                        : "",
                                 }}
                                 className={
-                                    pathname === path
+                                    pathname.includes(path)
                                         ? "active-link text-white"
                                         : "normal-link"
                                 }

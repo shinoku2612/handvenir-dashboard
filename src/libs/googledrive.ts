@@ -19,13 +19,13 @@ export async function uploadFile(
     file: File | Blob,
 ): Promise<drive_v3.Schema$File> {
     try {
-        const existingFileName: GaxiosResponse<drive_v3.Schema$FileList> =
+        const existingFiles: GaxiosResponse<drive_v3.Schema$FileList> =
             await drive.files.list({
                 q: `name='${fileName}'`,
                 fields: "files(id)",
                 spaces: "drive",
             });
-        const files: drive_v3.Schema$File[] = existingFileName.data.files!;
+        const files: drive_v3.Schema$File[] = existingFiles.data.files!;
         files.forEach((file: drive_v3.Schema$File) => {
             drive.files.delete({
                 fileId: file.id!,
@@ -63,4 +63,19 @@ export async function uploadFile(
     } catch (error) {
         return error as drive_v3.Schema$File;
     }
+}
+
+export async function deleteFile(fileName: string): Promise<void> {
+    const existingFiles: GaxiosResponse<drive_v3.Schema$FileList> =
+        await drive.files.list({
+            q: `name='${fileName}'`,
+            fields: "files(id)",
+            spaces: "drive",
+        });
+    const files: drive_v3.Schema$File[] = existingFiles.data.files!;
+    files.forEach((file: drive_v3.Schema$File) => {
+        drive.files.delete({
+            fileId: file.id!,
+        });
+    });
 }

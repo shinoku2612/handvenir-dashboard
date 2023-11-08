@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { CallbackError } from "mongoose";
 import { ClientConnector } from "@/libs/mongodb";
+import { genarateSlug } from "@/utils/helper";
 
 const ProductSchema = new mongoose.Schema(
     {
@@ -7,7 +8,7 @@ const ProductSchema = new mongoose.Schema(
         image: { type: String, required: true },
         price: { type: Number, required: true },
         description: { type: String, required: true },
-        slug: { type: String, unique: true },
+        slug: { type: String, require: true, unique: true },
         categories: { type: Array, default: [] },
     },
     { timestamps: true },

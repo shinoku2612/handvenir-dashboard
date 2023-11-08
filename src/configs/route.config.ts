@@ -9,7 +9,7 @@ const routes: Array<SidebarSection> = [
         title: "Dashboard",
         paths: [
             {
-                path: "/",
+                path: "/ecommerce",
                 name: "ecommerce",
                 Icon: FiShoppingBag,
             },

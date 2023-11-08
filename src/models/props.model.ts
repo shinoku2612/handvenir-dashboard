@@ -35,3 +35,7 @@ export interface WidgetProps {
 export interface ImagePreviewProps {
     source: File | Blob;
 }
+export interface DeleteModalProps {
+    message: string;
+    targetId: string;
+}
