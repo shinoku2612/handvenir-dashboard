@@ -14,7 +14,7 @@ export default function OrderRow({
             className="bg-white even:bg-light-gray border-b
                     dark:bg-slate-800 dark:even:bg-gray-700 dark:border-slate-700"
         >
-            <th
+            {/* <th
                 scope="row"
                 className="px-6 py-4 font-semibold text-gray-700 whitespace-nowrap dark:text-gray-300"
             >
@@ -53,7 +53,7 @@ export default function OrderRow({
                 >
                     Details
                 </Link>
-            </td>
+            </td> */}
         </tr>
     );
 }
