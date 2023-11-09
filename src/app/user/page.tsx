@@ -15,7 +15,9 @@ export default async function User({
 }: {
     searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<React.ReactElement> {
-    const response = await fetch(`${process.env.APP_DOMAIN}/api/user/`);
+    const response = await fetch(`${process.env.APP_DOMAIN}/api/user/`, {
+        cache: "no-store",
+    });
     const users: Array<User> = await response.json();
     return (
         <div className="m-2 mt-16 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">

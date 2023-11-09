@@ -6,7 +6,7 @@ import Loader from "@/components/Loader";
 import { redirect } from "next/navigation";
 
 const getCategories = async (url: string): Promise<Category[]> => {
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: "no-store" });
     const data = await response.json();
     return data;
 };
