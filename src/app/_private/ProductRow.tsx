@@ -50,6 +50,7 @@ export default function ProductRow({
                     <p className="ml-2 text-sm font-bold text-gray-900 dark:text-white">
                         {data.rating ?? 0}
                     </p>
+                    
                 </div>
             </td>
             <td className="px-6 py-4">

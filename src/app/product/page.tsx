@@ -6,7 +6,6 @@ import SearchBar from "@/components/SearchBar";
 import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
 import ProductRow from "@/app/_private/ProductRow";
-import Loader from "@/components/Loader";
 import DeleteModal from "@/components/DeleteModal";
 
 export default async function Product({
