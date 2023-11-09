@@ -16,17 +16,19 @@ export default function OrderRow({
         >
             <th
                 scope="row"
-                className="px-6 py-4 font-semibold text-gray-700 whitespace-nowrap dark:text-gray-300 flex items-center"
+                className="px-6 py-4 font-semibold text-gray-700 whitespace-nowrap dark:text-gray-300"
             >
-                <Image
-                    src={data.user.avatar}
-                    alt={data.user.name}
-                    width={36}
-                    height={36}
-                    priority
-                    className="object-center object-cover w-auto h-auto rounded-full"
-                />
-                <span className="ml-3">{data.user.name}</span>
+                <div className="flex items-center">
+                    <Image
+                        src={data.user.avatar}
+                        alt={data.user.name}
+                        width={36}
+                        height={36}
+                        priority
+                        className="object-center object-cover w-auto h-auto rounded-full"
+                    />
+                    <span className="ml-3">{data.user.name}</span>
+                </div>
             </th>
             <td className="px-6 py-4">
                 <p>{data.receiver.name}</p>

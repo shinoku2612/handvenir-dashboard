@@ -8,12 +8,7 @@ import { retryRequest } from "@/utils/retry";
 
 export async function GET(request: NextRequest) {
     try {
-        const products = await ProductModel.find().select([
-            "-createdAt",
-            "-updatedAt",
-            "-slug",
-            "-__v",
-        ]);
+        const products = await ProductModel.find();
         return NextResponse.json(products);
     } catch (error) {
         return new NextResponse(JSON.stringify(error), { status: 500 });

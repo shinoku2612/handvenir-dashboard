@@ -4,13 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
     try {
-        const users = await UserModel.find().select([
-            "-secret",
-            "-addresses",
-            "-createdAt",
-            "-updatedAt",
-            "-__v",
-        ]);
+        const users = await UserModel.find().select("-secret");
         return NextResponse.json(users);
     } catch (error) {
         return NextResponse.json(error);

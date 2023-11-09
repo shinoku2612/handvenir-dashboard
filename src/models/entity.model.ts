@@ -1,16 +1,30 @@
+export interface Address {
+    _id?: string;
+    country?: string;
+    city?: string;
+    district?: string;
+    town?: string;
+    street?: string;
+    isMain?: boolean;
+}
 export interface Product {
     _id?: string;
-    image: string;
     title: string;
+    image: string;
+    price: number;
     description: string;
     categories: Array<string>;
     rating?: number;
-    price: number;
+    createdAt?: string;
+    updatedAt?: string;
+    slug?: string;
+    __v?: number;
 }
 export interface Category {
     _id?: string;
     name: string;
     slug: string;
+    __v?: number;
 }
 export interface User {
     _id?: string;
@@ -19,8 +33,12 @@ export interface User {
     name: string;
     gender: string;
     date_of_birth: string;
+    addresses?: Array<Address>;
     avatar: string;
     status: "active" | "disabled";
+    __v?: number;
+    createdAt?: string;
+    updatedAt?: string;
 }
 export interface Order {
     _id?: string;
@@ -31,4 +49,8 @@ export interface Order {
     status: "pending" | "shipping" | "completed" | "canceled";
     address: string;
     total: number;
+    isCancelable?: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+    __v?: number;
 }
