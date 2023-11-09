@@ -40,5 +40,5 @@ const UserSchema = new mongoose.Schema(
 //     }
 // });
 
-const UserModal = ClientConnector.model("User", UserSchema);
-export default UserModal;
+const UserModel = ClientConnector.model("User", UserSchema);
+export default UserModel;

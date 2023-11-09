@@ -22,3 +22,13 @@ export interface User {
     avatar: string;
     status: "active" | "disabled";
 }
+export interface Order {
+    _id?: string;
+    receiver: { name: string; phone: string };
+    product_list: Array<{ product: string; quantity: number; price: number }>;
+    user: { _id: string; name: string; avatar: string };
+    method: string;
+    status: "pending" | "shipping" | "completed" | "canceled";
+    address: string;
+    total: number;
+}

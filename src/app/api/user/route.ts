@@ -1,10 +1,10 @@
-import UserModal from "@/databases/user.model";
+import UserModel from "@/databases/user.model";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
     try {
-        const users = await UserModal.find().select([
+        const users = await UserModel.find().select([
             "-secret",
             "-addresses",
             "-createdAt",
@@ -24,13 +24,13 @@ export async function PATCH(request: NextRequest) {
         const enableId = searchParams.get("enable");
 
         if (disableId) {
-            await UserModal.findByIdAndUpdate(disableId, {
+            await UserModel.findByIdAndUpdate(disableId, {
                 $set: {
                     status: "disabled",
                 },
             });
         } else if (enableId) {
-            await UserModal.findByIdAndUpdate(enableId, {
+            await UserModel.findByIdAndUpdate(enableId, {
                 $set: {
                     status: "active",
                 },
