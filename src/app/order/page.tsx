@@ -14,7 +14,7 @@ export default async function Order(): Promise<React.ReactElement> {
     const response = await fetch(`${process.env.APP_DOMAIN}/api/order/`, {
         cache: "no-store",
     });
-    const orders: Array<Order> = await response.json();
+    // const orders: Array<Order> = await response.json();
     return (
         <div className="m-2 mt-16 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
             <Header
