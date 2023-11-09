@@ -37,7 +37,7 @@ export default async function User({
                 title="Users"
             />
             <div className="mt-4">
-                {/* <DataTable
+                <DataTable
                     headers={[
                         "",
                         "Fullname",
@@ -50,7 +50,7 @@ export default async function User({
                     ]}
                     renderData={users}
                     RowItem={UserRow}
-                /> */}
+                />
             </div>
         </div>
     );

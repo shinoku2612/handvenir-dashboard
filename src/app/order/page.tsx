@@ -15,7 +15,6 @@ export default async function Order(): Promise<React.ReactElement> {
         cache: "no-store",
     });
     const orders: Array<Order> = await response.json();
-    console.log(orders)
     return (
         <div className="m-2 mt-16 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
             <Header
@@ -25,7 +24,7 @@ export default async function Order(): Promise<React.ReactElement> {
             <SearchBar />
 
             <div className="mt-4">
-                {/* <DataTable
+                <DataTable
                     headers={[
                         "User",
                         "Receiver",
@@ -37,7 +36,7 @@ export default async function Order(): Promise<React.ReactElement> {
                     ]}
                     renderData={orders}
                     RowItem={OrderRow}
-                /> */}
+                />
             </div>
         </div>
     );
