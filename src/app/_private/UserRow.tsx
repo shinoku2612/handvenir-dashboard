@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { User } from "@/models/entity.model";
 import Image from "next/image";
@@ -36,7 +35,9 @@ export default function UserRow({ data }: { data: User }): React.ReactElement {
                 <span>{data.gender}</span>
             </td>
             <td className="px-6 py-4">
-                <span>{data.date_of_birth}</span>
+                <span>
+                    {new Date(data.date_of_birth).toLocaleDateString("en-GB")}
+                </span>
             </td>
             <td className="px-6 py-4">
                 {data.status === "active" ? (
