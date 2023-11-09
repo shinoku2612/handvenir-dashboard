@@ -19,6 +19,11 @@ const routes: Array<SidebarSection> = [
         title: "Pages",
         paths: [
             {
+                path: "/user",
+                name: "user",
+                Icon: RiContactsLine,
+            },
+            {
                 path: "/category",
                 name: "category",
                 Icon: BiCategory,
@@ -32,11 +37,6 @@ const routes: Array<SidebarSection> = [
                 path: "/order",
                 name: "order",
                 Icon: AiOutlineShoppingCart,
-            },
-            {
-                path: "/user",
-                name: "user",
-                Icon: RiContactsLine,
             },
         ],
     },

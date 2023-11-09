@@ -39,3 +39,8 @@ export interface DeleteModalProps {
     message: string;
     targetId: string;
 }
+export interface ConfirmModalProps {
+    message: string;
+    targetId: string;
+    type: "disable" | "enable";
+}
