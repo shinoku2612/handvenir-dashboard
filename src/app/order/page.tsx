@@ -14,19 +14,17 @@ export default async function Order(): Promise<React.ReactElement> {
     const response = await fetch(`${process.env.APP_DOMAIN}/api/order/`, {
         cache: "no-store",
     });
-    const orders:Array<Order> = await response.json();
+    const orders: Array<Order> = await response.json();
     return (
         <div className="m-2 mt-16 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-            <div className="flex items-center justify-between">
-                <Header
-                    category="Page"
-                    title="Orders"
-                />
-            </div>
+            <Header
+                category="Page"
+                title="Orders"
+            />
             <SearchBar />
 
             <div className="mt-4">
-                <DataTable
+                {/* <DataTable
                     headers={[
                         "User",
                         "Receiver",
@@ -38,7 +36,7 @@ export default async function Order(): Promise<React.ReactElement> {
                     ]}
                     renderData={orders}
                     RowItem={OrderRow}
-                />
+                /> */}
             </div>
         </div>
     );

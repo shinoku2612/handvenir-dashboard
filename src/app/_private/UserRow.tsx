@@ -9,7 +9,7 @@ export default function UserRow({ data }: { data: User }): React.ReactElement {
             className="bg-white even:bg-light-gray border-b
                     dark:bg-slate-800 dark:even:bg-gray-700 dark:border-slate-700"
         >
-            {/* <td className="w-32 px-6 py-4">
+            <td className="w-32 px-6 py-4">
                 <Image
                     src={data.avatar}
                     alt={data.name}
@@ -66,7 +66,7 @@ export default function UserRow({ data }: { data: User }): React.ReactElement {
                         Enable
                     </Link>
                 )}
-            </td> */}
+            </td>
         </tr>
     );
 }
