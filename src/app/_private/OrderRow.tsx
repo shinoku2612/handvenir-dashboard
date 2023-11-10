@@ -3,6 +3,7 @@ import { Order } from "@/models/entity.model";
 import Image from "next/image";
 import Link from "next/link";
 import { BiEdit, BiTrash } from "react-icons/bi";
+import { classNames } from "@/utils/helper";
 
 export default function OrderRow({
     data,
@@ -44,7 +45,16 @@ export default function OrderRow({
                 <span>${data.total}</span>
             </td>
             <td className="px-6 py-4">
-                <span className={data.status}>{data.status}</span>
+                <span
+                    className={classNames({
+                        pending: data.status === "pending",
+                        shipping: data.status === "shipping",
+                        completed: data.status === "completed",
+                        canceled: data.status === "canceled",
+                    })}
+                >
+                    {data.status}
+                </span>
             </td>
             <td className="px-6 py-4">
                 <Link

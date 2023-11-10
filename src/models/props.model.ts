@@ -1,3 +1,5 @@
+import { Url } from "next/dist/shared/lib/router/router";
+import { LinkProps } from "next/link";
 import React from "react";
 import { IconType } from "react-icons";
 

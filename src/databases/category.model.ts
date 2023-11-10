@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { ClientConnector } from "@/libs/mongodb";
 
 const CategorySchema = new mongoose.Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     slug: { type: String, unique: true },
 });
 

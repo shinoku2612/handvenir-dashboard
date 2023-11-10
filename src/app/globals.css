@@ -23,6 +23,10 @@
   .canceled {
     @apply bg-red-100 text-red-800 text-xs font-medium mr-2 px-3 py-1 rounded dark:bg-red-900 dark:text-red-300
   }
+
+  .form-btn {
+    @apply bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-700 dark:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-800
+  }
 }
 @layer utilities {
   .side-bar-hidden::-webkit-scrollbar {
@@ -30,6 +34,20 @@
   }
   .side-bar-hidden {
     cursor: ns-resize;
+  }
+
+  .scroll-sm::-webkit-scrollbar {
+    width: 4px;
+  }
+  .scroll-sm::-webkit-scrollbar-thumb {
+    background-color: rgb(202, 202, 202);
+    border-radius: 40px;
+  }
+  .scroll-sm::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .dark .scroll-sm::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }
 
