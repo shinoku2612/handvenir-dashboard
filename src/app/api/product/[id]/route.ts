@@ -11,9 +11,9 @@ export async function GET(
     try {
         const productId = params.id;
         const product = await ProductModel.findById(productId);
-        return NextResponse.json(product);
+        return NextResponse.json(product, { status: 200 });
     } catch (error) {
-        return NextResponse.json(error);
+        return NextResponse.json(error, { status: 500 });
     }
 }
 
@@ -34,32 +34,42 @@ export async function PUT(
 
         if (image.size !== 0) {
             const newImage = await uploadFile(productId, image);
-            await ProductModel.findByIdAndUpdate(productId, {
-                $set: {
-                    title,
-                    description,
-                    price,
-                    image: newImage.webContentLink,
-                    categories,
-                    slug,
+            await ProductModel.findByIdAndUpdate(
+                productId,
+                {
+                    $set: {
+                        title,
+                        description,
+                        price,
+                        image: newImage.webContentLink,
+                        categories,
+                        slug,
+                    },
                 },
-            });
+                { new: true },
+            );
         } else {
-            await ProductModel.findByIdAndUpdate(productId, {
-                $set: {
-                    title,
-                    description,
-                    price,
-                    categories,
-                    slug,
+            await ProductModel.findByIdAndUpdate(
+                productId,
+                {
+                    $set: {
+                        title,
+                        description,
+                        price,
+                        categories,
+                        slug,
+                    },
                 },
-            });
+                { new: true },
+            );
         }
         revalidatePath("/product", "page");
-        return NextResponse.json("Update successful!");
+        return NextResponse.json(
+            { message: "Update successful!" },
+            { status: 200 },
+        );
     } catch (error) {
-        console.log(error);
-        return NextResponse.json("Something went wrong");
+        return NextResponse.json(error, { status: 500 });
     }
 }
 
@@ -74,8 +84,11 @@ export async function DELETE(
             deleteFile(productId),
         ]);
         revalidatePath("/product", "page");
-        return NextResponse.json({ message: "Delete successful" });
+        return NextResponse.json(
+            { message: "Delete successful" },
+            { status: 200 },
+        );
     } catch (error) {
-        return NextResponse.json(error);
+        return NextResponse.json(error, { status: 500 });
     }
 }

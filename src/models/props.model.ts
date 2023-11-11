@@ -39,7 +39,9 @@ export interface ImagePreviewProps {
 }
 export interface DeleteModalProps {
     message: string;
-    targetId: string;
+    originUrl: string;
+    requestUrl: string;
+    redirectUrl: string;
 }
 export interface ConfirmModalProps {
     message: string;

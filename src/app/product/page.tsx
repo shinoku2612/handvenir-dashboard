@@ -13,15 +13,18 @@ export default async function Product({
 }: {
     searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<React.ReactElement> {
-    const response = await fetch(`${process.env.APP_DOMAIN}/api/product/`);
+    const deleteId = searchParams.delete;
+    const response = await fetch(`${process.env.APP_DOMAIN}/api/product`);
     const products: Array<Product> = await response.json();
 
     return (
         <div className="m-2 mt-16 md:m-10 md:mt-7 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-            {searchParams.delete ? (
+            {deleteId ? (
                 <DeleteModal
                     message="Are you sure you want to delete this product?"
-                    targetId={searchParams.delete as string}
+                    originUrl="/product"
+                    requestUrl={`${process.env.APP_DOMAIN}/api/product/${deleteId}`}
+                    redirectUrl="/product"
                 />
             ) : null}
             <div className="flex items-center justify-between">

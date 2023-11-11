@@ -89,11 +89,11 @@ export default async function NewProductPage(): Promise<React.ReactElement> {
                     <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Categories
                     </p>
-                    <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <ul className="grid grid-cols-2 items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         {categories?.map((category) => (
                             <li
                                 key={category._id}
-                                className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                                // className="border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 last-of-type:border-none"
                             >
                                 <div className="flex items-center pl-3">
                                     <input

@@ -9,9 +9,9 @@ import { retryRequest } from "@/utils/retry";
 export async function GET(request: NextRequest) {
     try {
         const products = await ProductModel.find();
-        return NextResponse.json(products);
+        return NextResponse.json(products, { status: 200 });
     } catch (error) {
-        return new NextResponse(JSON.stringify(error), { status: 500 });
+        return NextResponse.json(error, { status: 500 });
     }
 }
 export async function POST(request: NextRequest) {
@@ -47,8 +47,8 @@ export async function POST(request: NextRequest) {
             }),
         ]);
         revalidatePath("/product", "page");
-        return NextResponse.json(product);
+        return NextResponse.json(product, { status: 200 });
     } catch (error) {
-        return NextResponse.json(error);
+        return NextResponse.json(error, { status: 500 });
     }
 }

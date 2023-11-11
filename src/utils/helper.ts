@@ -11,7 +11,7 @@ export function formatNumber(
     return formatValue;
 }
 
-export function genarateSlug(name: string, postfix?: string): string {
+export function genarateSlug(name: string, postfix: string = ""): string {
     const slug = name
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
@@ -19,6 +19,7 @@ export function genarateSlug(name: string, postfix?: string): string {
         .replace(/đ/g, "d")
         .replaceAll(" ", "-")
         .toLowerCase();
+    if (postfix === "") return slug;
     return slug + "-" + postfix;
 }
 

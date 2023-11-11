@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import { Category } from "@/models/entity.model";
 import { classNames } from "@/utils/helper";
 import { Metadata } from "next";
-import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {

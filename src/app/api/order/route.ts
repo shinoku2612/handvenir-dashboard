@@ -9,8 +9,8 @@ export async function GET(request: NextRequest) {
             "avatar name",
             UserModel,
         );
-        return NextResponse.json(orders);
+        return NextResponse.json(orders, { status: 200 });
     } catch (error) {
-        return NextResponse.json(error);
+        return NextResponse.json(error, { status: 500 });
     }
 }

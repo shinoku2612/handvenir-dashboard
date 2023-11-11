@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
     try {
         const users = await UserModel.find().select("-secret");
-        return NextResponse.json(users);
+        return NextResponse.json(users, { status: 200 });
     } catch (error) {
-        return NextResponse.json(error);
+        return NextResponse.json(error, { status: 500 });
     }
 }
 
@@ -31,8 +31,11 @@ export async function PATCH(request: NextRequest) {
             });
         }
         revalidatePath("/user", "page");
-        return NextResponse.json("Done");
+        return NextResponse.json(
+            { message: "Change status successfully" },
+            { status: 200 },
+        );
     } catch (error) {
-        return NextResponse.json(error);
+        return NextResponse.json(error, { status: 500 });
     }
 }
