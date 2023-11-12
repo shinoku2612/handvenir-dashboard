@@ -1,5 +1,5 @@
 import CategoryControl from "@/app/_private/CategoryControl";
-import DeleteModal from "@/components/DeleteModal";
+import ConfirmModal from "@/components/ConfirmModal";
 import Header from "@/components/Header";
 import { Category } from "@/models/entity.model";
 import Link from "next/link";
@@ -63,11 +63,14 @@ export default async function CategoryDetail({
                 ) : null}
             </form>
             {isDelete ? (
-                <DeleteModal
+                <ConfirmModal
                     message="Are you sure you want to delete this category?"
                     originUrl={`/category?category=${category._id}`}
                     requestUrl={`${process.env.APP_DOMAIN}/api/category/${categoryId}`}
                     redirectUrl="/category"
+                    options={{
+                        method: "DELETE",
+                    }}
                 />
             ) : null}
         </div>

@@ -2,8 +2,9 @@ import React from "react";
 import { Order } from "@/models/entity.model";
 import Image from "next/image";
 import Link from "next/link";
-import { BiEdit, BiTrash } from "react-icons/bi";
+import { HiOutlineChevronDoubleRight } from "react-icons/hi";
 import { classNames } from "@/utils/helper";
+import { BiSolidDetail } from "react-icons/bi";
 
 export default function OrderRow({
     data,
@@ -36,7 +37,23 @@ export default function OrderRow({
                 <p>{data.receiver.phone}</p>
             </td>
             <td className="px-6 py-4 uppercase font-bold">
-                <span>{data.method}</span>
+                {data.method === "paypal" ? (
+                    <Image
+                        src="/paypal.svg"
+                        alt="Paypal"
+                        width={60}
+                        height={30}
+                        priority
+                    />
+                ) : (
+                    <Image
+                        src="/cod.svg"
+                        alt="Paypal"
+                        width={60}
+                        height={30}
+                        priority
+                    />
+                )}
             </td>
             <td className="px-6 py-4">
                 <span>{data.address}</span>
@@ -57,12 +74,31 @@ export default function OrderRow({
                 </span>
             </td>
             <td className="px-6 py-4">
-                <Link
-                    href={`/order/${data._id}`}
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                    Details
-                </Link>
+                <div className=" flex items-center">
+                    <Link
+                        href={`/order?boost=${data._id}`}
+                        className={classNames(
+                            "font-medium text-xl text-red-600 dark:text-red-500 hover:underline flex justify-center",
+                            {
+                                "pointer-events-none":
+                                    data.status === "completed" ||
+                                    data.status === "canceled",
+
+                                "opacity-50":
+                                    data.status === "completed" ||
+                                    data.status === "canceled",
+                            },
+                        )}
+                    >
+                        <HiOutlineChevronDoubleRight />
+                    </Link>
+                    <Link
+                        href={`/order/${data._id}`}
+                        className="font-medium text-xl text-blue-600 dark:text-blue-500 hover:underline ml-3"
+                    >
+                        <BiSolidDetail />
+                    </Link>
+                </div>
             </td>
         </tr>
     );

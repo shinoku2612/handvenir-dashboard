@@ -45,7 +45,7 @@ export interface Order {
     receiver: { name: string; phone: string };
     product_list: Array<{ product: string; quantity: number; price: number }>;
     user: { _id: string; name: string; avatar: string };
-    method: string;
+    method: "cod" | "paypal";
     status: "pending" | "shipping" | "completed" | "canceled";
     address: string;
     total: number;

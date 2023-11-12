@@ -24,14 +24,24 @@ export default async function User({
             {searchParams.disable ? (
                 <ConfirmModal
                     message="Are you sure you want to disable this user?"
-                    targetId={searchParams.disable as string}
-                    type="disable"
+                    originUrl="/user"
+                    requestUrl={`${process.env.APP_DOMAIN}/api/user?disable=${searchParams.disable}`}
+                    redirectUrl="/user"
+                    options={{
+                        method: "PATCH",
+                        cache: "no-store",
+                    }}
                 />
             ) : searchParams.enable ? (
                 <ConfirmModal
                     message="Are you sure you want to enable this user?"
-                    targetId={searchParams.enable as string}
-                    type="enable"
+                    originUrl="/user"
+                    requestUrl={`${process.env.APP_DOMAIN}/api/user?enable=${searchParams.enable}`}
+                    redirectUrl="/user"
+                    options={{
+                        method: "PATCH",
+                        cache: "no-store",
+                    }}
                 />
             ) : null}
             <Header

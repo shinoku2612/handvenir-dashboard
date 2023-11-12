@@ -6,7 +6,7 @@ import SearchBar from "@/components/SearchBar";
 import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
 import ProductRow from "@/app/_private/ProductRow";
-import DeleteModal from "@/components/DeleteModal";
+import ConfirmModal from "@/components/ConfirmModal";
 
 export default async function Product({
     searchParams,
@@ -20,11 +20,12 @@ export default async function Product({
     return (
         <div className="m-2 mt-16 md:m-10 md:mt-7 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
             {deleteId ? (
-                <DeleteModal
+                <ConfirmModal
                     message="Are you sure you want to delete this product?"
                     originUrl="/product"
                     requestUrl={`${process.env.APP_DOMAIN}/api/product/${deleteId}`}
                     redirectUrl="/product"
+                    options={{ method: "DELETE" }}
                 />
             ) : null}
             <div className="flex items-center justify-between">

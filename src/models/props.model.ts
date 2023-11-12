@@ -1,5 +1,3 @@
-import { Url } from "next/dist/shared/lib/router/router";
-import { LinkProps } from "next/link";
 import React from "react";
 import { IconType } from "react-icons";
 
@@ -37,14 +35,11 @@ export interface WidgetProps {
 export interface ImagePreviewProps {
     source: File | Blob;
 }
-export interface DeleteModalProps {
+export interface ConfirmModalProps {
     message: string;
     originUrl: string;
     requestUrl: string;
     redirectUrl: string;
+    options?: RequestInit
 }
-export interface ConfirmModalProps {
-    message: string;
-    targetId: string;
-    type: "disable" | "enable";
-}
+

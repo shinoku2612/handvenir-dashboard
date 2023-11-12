@@ -5,12 +5,18 @@ import { Metadata } from "next";
 import React from "react";
 import OrderRow from "../_private/OrderRow";
 import { Order } from "@/models/entity.model";
+import ConfirmModal from "@/components/ConfirmModal";
 
 export const metadata: Metadata = {
     title: "Order",
 };
 
-export default async function Order(): Promise<React.ReactElement> {
+export default async function Order({
+    searchParams,
+}: {
+    searchParams: { [key: string]: string | string[] | undefined };
+}): Promise<React.ReactElement> {
+    const boostId = searchParams.boost;
     const response = await fetch(`${process.env.APP_DOMAIN}/api/order/`, {
         cache: "no-store",
     });
@@ -32,12 +38,24 @@ export default async function Order(): Promise<React.ReactElement> {
                         "Shipping address",
                         "Total",
                         "Status",
-                        "Action",
+                        "Boost",
                     ]}
                     renderData={orders}
                     RowItem={OrderRow}
                 />
             </div>
+            {boostId ? (
+                <ConfirmModal
+                    message="Are you sure to boost this order status?"
+                    originUrl="/order"
+                    requestUrl={`${process.env.APP_DOMAIN}/api/order?boost=${boostId}`}
+                    redirectUrl="/order"
+                    options={{
+                        method: "PATCH",
+                        cache: "no-store",
+                    }}
+                />
+            ) : null}
         </div>
     );
 }
