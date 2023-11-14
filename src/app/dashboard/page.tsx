@@ -6,7 +6,7 @@ import { FiBarChart } from "react-icons/fi";
 import Widget from "@/components/Widget";
 import RevenueSection from "../_private/RevenueSection";
 
-export default function Ecommerce() {
+export default function DashBoard() {
     return (
         <div className="mt-12">
             <div className="flex flex-wrap lg:flex-nowrap justify-center">
@@ -61,7 +61,7 @@ export default function Ecommerce() {
                     />
                 </div>
             </div>
-            <RevenueSection />
+            {/* <RevenueSection /> */}
         </div>
     );
 }

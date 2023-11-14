@@ -2,6 +2,7 @@ import { ConfirmModalProps } from "@/models/props.model";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+import FormButton from "./FormButton";
 
 export default function ConfirmModal({
     message,
@@ -70,13 +71,13 @@ export default function ConfirmModal({
                             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                                 {message}
                             </h3>
-                            <button
+                            <FormButton
                                 data-modal-hide="popup-modal"
                                 type="submit"
                                 className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             >
                                 Yes, I'm sure
-                            </button>
+                            </FormButton>
                             <Link
                                 href={originUrl}
                                 data-modal-hide="popup-modal"

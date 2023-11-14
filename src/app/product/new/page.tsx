@@ -1,9 +1,11 @@
-import React from "react";
+"use client";
+import React, { useRef, useState } from "react";
 import Header from "@/components/Header";
-import { Category, Product } from "@/models/entity.model";
+import { Category } from "@/models/entity.model";
 import ImagePreview from "@/components/ImagePreview";
-import Loader from "@/components/Loader";
-import { redirect } from "next/navigation";
+import { handleAddProduct } from "@/utils/server-actions";
+import useSWR from "swr";
+import FormButton from "@/components/FormButton";
 
 const getCategories = async (url: string): Promise<Category[]> => {
     const response = await fetch(url, { cache: "no-store" });
@@ -11,20 +13,15 @@ const getCategories = async (url: string): Promise<Category[]> => {
     return data;
 };
 
-export default async function NewProductPage(): Promise<React.ReactElement> {
-    const categories: Array<Category> = await getCategories(
-        `${process.env.APP_DOMAIN}/api/category`,
+export default function NewProductPage(): React.ReactElement {
+    const { data: categories, isLoading } = useSWR(
+        "/api/category",
+        getCategories,
     );
+    const [previewImage, setPreviewImage] = useState<File | Blob>();
+    const imagePreviewRef = useRef<React.ReactElement>();
 
-    async function handleAddProduct(formData: FormData) {
-        "use server";
-
-        const response = await fetch(`${process.env.APP_DOMAIN}/api/product`, {
-            method: "POST",
-            body: formData,
-        });
-        if (response.ok) redirect("/product");
-    }
+    // TODO: Add crop image handler and get file data to submit
 
     return (
         <div className="m-2 mt-16 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
@@ -89,33 +86,53 @@ export default async function NewProductPage(): Promise<React.ReactElement> {
                     <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Categories
                     </p>
-                    <ul className="grid grid-cols-2 items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        {categories?.map((category) => (
-                            <li
-                                key={category._id}
-                                // className="border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 last-of-type:border-none"
-                            >
-                                <div className="flex items-center pl-3">
-                                    <input
-                                        id={category.slug}
-                                        name="categories"
-                                        value={category.slug}
-                                        multiple
-                                        type="checkbox"
-                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                                    />
-                                    <label
-                                        htmlFor={category.slug}
-                                        className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >
-                                        {category.name}
-                                    </label>
+                    {isLoading ? (
+                        <div
+                            role="status"
+                            className="max-w-md p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"
+                        >
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                    <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
                                 </div>
-                            </li>
-                        ))}
-                    </ul>
+                                <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                            </div>
+                        </div>
+                    ) : (
+                        <ul className="grid grid-cols-2 items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            {categories?.map((category) => (
+                                <li
+                                    key={category._id}
+                                    // className="border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 last-of-type:border-none"
+                                >
+                                    <div className="flex items-center pl-3">
+                                        <input
+                                            id={category.slug}
+                                            name="categories"
+                                            value={category.slug}
+                                            multiple
+                                            type="checkbox"
+                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                        />
+                                        <label
+                                            htmlFor={category.slug}
+                                            className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        >
+                                            {category.name}
+                                        </label>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
-                {/* {previewImage ? <ImagePreview source={previewImage} /> : null} */}
+                {previewImage ? (
+                    <ImagePreview
+                        source={previewImage}
+                        ref={imagePreviewRef}
+                    />
+                ) : null}
                 <div className="flex items-center justify-center w-full mt-6">
                     <label
                         htmlFor="dropzoneFile"
@@ -151,16 +168,19 @@ export default async function NewProductPage(): Promise<React.ReactElement> {
                             type="file"
                             name="image"
                             className="hidden"
+                            onChange={(e) =>
+                                setPreviewImage(e.target.files?.[0])
+                            }
                         />
                     </label>
                 </div>
 
-                <button
+                <FormButton
                     type="submit"
                     className="form-btn mt-6"
                 >
                     Add
-                </button>
+                </FormButton>
             </form>
         </div>
     );
