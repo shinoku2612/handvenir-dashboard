@@ -4,9 +4,9 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "**",
+                hostname: "drive.google.com",
                 port: "",
-                pathname: "/**",
+                pathname: "/drive/**",
             },
         ],
     },
