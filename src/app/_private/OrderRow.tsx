@@ -44,6 +44,10 @@ export default function OrderRow({
                         width={60}
                         height={30}
                         priority
+                        style={{
+                            width: "auto",
+                            height: "auto",
+                        }}
                     />
                 ) : (
                     <Image
@@ -52,6 +56,10 @@ export default function OrderRow({
                         width={60}
                         height={30}
                         priority
+                        style={{
+                            width: "auto",
+                            height: "auto",
+                        }}
                     />
                 )}
             </td>
