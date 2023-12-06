@@ -205,4 +205,4 @@ function ImagePreview(
         </div>
     );
 }
-export default forwardRef(React.memo(ImagePreview));
+export default React.memo(forwardRef(ImagePreview));
