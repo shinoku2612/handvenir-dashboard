@@ -14,13 +14,13 @@ import {
 
 export default async function DashBoard() {
     const earning = await getEarningCount();
-    const [categorySale, productCount, userCount, saleCount] =
-        await Promise.all([
-            getProductSale(),
-            getProductCount(),
-            getUserCount(),
-            getSaleCount(),
-        ]);
+    // const [categorySale, productCount, userCount, saleCount] =
+    //     await Promise.all([
+    //         getProductSale(),
+    //         getProductCount(),
+    //         getUserCount(),
+    //         getSaleCount(),
+    //     ]);
     return (
         <div>
             <div className="flex flex-wrap lg:flex-nowrap justify-center">
@@ -39,7 +39,7 @@ export default async function DashBoard() {
                         </div>
                     </div>
                 </div>
-                <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
+                {/* <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
                     <Widget
                         color="#03C9D7"
                         backgroundColor="#E5FAFB"
@@ -64,9 +64,9 @@ export default async function DashBoard() {
                         type="increased"
                         label="Sales"
                     />
-                </div>
+                </div> */}
             </div>
-            <DashboardChart data={categorySale} />
+            {/* <DashboardChart data={categorySale} /> */}
         </div>
     );
 }
