@@ -14,7 +14,7 @@ import {
 } from "@/services/dashboard.service";
 
 export default async function DashBoard() {
-    const [categorySale, productCount, userCount, saleCount, earning] =
+    const [categorySale, productCount, userCount, saleCount, earningCount] =
         await Promise.all([
             getProductSale(),
             getProductCount(),
@@ -35,7 +35,7 @@ export default async function DashBoard() {
                         <div className="">
                             <p className="font-bold text-gray-400">Earnings</p>
                             <p className="text-2xl text-shadow-sm">
-                                {`$${earning}`}
+                                {`$${earningCount}`}
                             </p>
                         </div>
                     </div>
