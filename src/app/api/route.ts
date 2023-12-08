@@ -1,30 +1,49 @@
 import OrderModel from "@/databases/order.model";
+import UserModel from "@/databases/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
     try {
-        const earningGroup = await OrderModel.aggregate([
-            { $match: { status: "completed" } },
-            { $unwind: "$product_list" },
-            {
-                $group: {
-                    _id: null,
-                    amount: {
-                        $sum: {
-                            $multiply: [
-                                "$product_list.quantity",
-                                "$product_list.price",
-                            ],
-                        },
-                    },
-                },
-            },
-        ]);
-        const earningAmount = earningGroup.reduce(
-            (amount, earning) => amount + earning.amount,
-            0,
+        const orders = await OrderModel.find().populate(
+            "user",
+            "avatar name",
+            UserModel,
         );
-        return NextResponse.json(earningAmount, { status: 200 });
+        return NextResponse.json(orders, { status: 200 });
+    } catch (error) {
+        return NextResponse.json(error, { status: 500 });
+    }
+}
+export async function PATCH(request: NextRequest) {
+    try {
+        const searchParams = request.nextUrl.searchParams;
+        const orderId = searchParams.get("boost");
+        if (!orderId)
+            return NextResponse.json(
+                { message: "No orderId" },
+                { status: 500 },
+            );
+        const order = await OrderModel.findById(orderId);
+        switch (order?.status) {
+            case "pending":
+                order.status = "shipping";
+                break;
+            case "shipping":
+                order.status = "completed";
+                break;
+            case "completed":
+            case "canceled":
+            default:
+                return NextResponse.json(
+                    { message: "Cannot change this order's status" },
+                    { status: 401 },
+                );
+        }
+        await order.save();
+        return NextResponse.json(
+            { message: "Change status successfully" },
+            { status: 200 },
+        );
     } catch (error) {
         return NextResponse.json(error, { status: 500 });
     }
