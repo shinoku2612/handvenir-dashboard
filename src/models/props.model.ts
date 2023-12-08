@@ -29,7 +29,7 @@ export interface WidgetProps {
     label: string;
     type: "increased" | "decreased";
     amount: number;
-    difference: number;
+    difference?: number;
     Icon: IconType;
 }
 export interface ImagePreviewProps {
@@ -40,6 +40,5 @@ export interface ConfirmModalProps {
     originUrl: string;
     requestUrl: string;
     redirectUrl: string;
-    options?: RequestInit
+    options?: RequestInit;
 }
-

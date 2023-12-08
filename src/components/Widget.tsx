@@ -29,18 +29,19 @@ export default function Widget({
                 <Icon />
             </button>
             <p className="mt-3">
-                <span className="text-lg font-semibold">
+                <span className="text-lg font-semibold text-shadow-sm">
                     {formatNumber(amount)}
                 </span>
-                {type === "increased" ? (
-                    <span className="text-sm text-green-600 ml-2">
-                        +{difference}%
-                    </span>
-                ) : (
-                    <span className="text-sm text-red-600 ml-2">
-                        -{difference}%
-                    </span>
-                )}
+                {difference &&
+                    (type === "increased" ? (
+                        <span className="text-sm text-green-600 ml-2">
+                            +{difference}%
+                        </span>
+                    ) : (
+                        <span className="text-sm text-red-600 ml-2">
+                            -{difference}%
+                        </span>
+                    ))}
             </p>
             <p className="text-sm text-gray-400 mt-1">{label}</p>
         </div>

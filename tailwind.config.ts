@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
     content: [
@@ -26,6 +27,9 @@ const config: Config = {
                 "dark-transparent": "rgba(0, 0, 0, 0.5)",
                 "light-transparent": "rgba(255, 255, 255, 0.5)",
             },
+            textShadow: {
+                sm: "0px 0px 4px currentColor",
+            },
             borderWidth: {
                 1: "1px",
             },
@@ -49,6 +53,17 @@ const config: Config = {
             },
         },
     },
-    plugins: [],
+    plugins: [
+        plugin(function ({ matchUtilities, theme }) {
+            matchUtilities(
+                {
+                    "text-shadow": (value) => ({
+                        textShadow: value,
+                    }),
+                },
+                { values: theme("textShadow") },
+            );
+        }),
+    ],
 };
 export default config;

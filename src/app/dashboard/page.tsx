@@ -4,11 +4,29 @@ import { BsBoxSeam } from "react-icons/bs";
 import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { FiBarChart } from "react-icons/fi";
 import Widget from "@/components/Widget";
-import RevenueSection from "../_private/RevenueSection";
+import DashboardChart from "../_private/DashboardChart";
 
-export default function DashBoard() {
+export default async function DashBoard() {
+    const statisticsFetcher = (endpoints: Array<string>) => {
+        return endpoints.map((endpoint) =>
+            fetch(`${process.env.APP_DOMAIN}/api/${endpoint}`, {
+                cache: "no-store",
+            }),
+        );
+    };
+    const statisticResponse = await Promise.all(
+        statisticsFetcher([
+            "/statistics/product/count",
+            "/statistics/product/sale",
+            "/statistics/user",
+            "/statistics/sale",
+            "/statistics/earning",
+        ]),
+    );
+    const [productCount, categorySale, userCount, sales, earning] =
+        await Promise.all(statisticResponse.map((response) => response.json()));
     return (
-        <div className="mt-12">
+        <div>
             <div className="flex flex-wrap lg:flex-nowrap justify-center">
                 <div
                     className="bg-white
@@ -19,16 +37,8 @@ export default function DashBoard() {
                     <div className="flex justify-between items-center">
                         <div className="">
                             <p className="font-bold text-gray-400">Earnings</p>
-                            <p className="text-2xl">$123.456</p>
+                            <p className="text-2xl text-shadow-sm">${earning}</p>
                         </div>
-                    </div>
-                    <div className="mt-6">
-                        <Button
-                            color="white"
-                            label="Download"
-                            borderRadius="10px"
-                            size="md"
-                        />
                     </div>
                 </div>
                 <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
@@ -36,8 +46,7 @@ export default function DashBoard() {
                         color="#03C9D7"
                         backgroundColor="#E5FAFB"
                         Icon={MdOutlineSupervisorAccount}
-                        amount={12_345}
-                        difference={4}
+                        amount={userCount}
                         type="increased"
                         label="Users"
                     />
@@ -45,23 +54,21 @@ export default function DashBoard() {
                         color="rgb(255, 244, 229)"
                         backgroundColor="rgb(254, 201, 15)"
                         Icon={BsBoxSeam}
-                        amount={3_456}
-                        difference={5}
+                        amount={productCount}
                         type="decreased"
-                        label="Products"
+                        label="Product Types"
                     />
                     <Widget
                         color="rgb(228, 106, 118)"
                         backgroundColor="rgb(255, 244, 229)"
                         Icon={FiBarChart}
-                        amount={2_468}
-                        difference={12}
+                        amount={sales}
                         type="increased"
                         label="Sales"
                     />
                 </div>
             </div>
-            {/* <RevenueSection /> */}
+            <DashboardChart data={categorySale} />
         </div>
     );
 }

@@ -50,3 +50,60 @@ export function classNames(...anything: any[]) {
     });
     return Array.from(classSet).join(" ");
 }
+
+export function getLineChartOptions(themeMode: string) {
+    const options = {
+        responsive: true,
+        scales: {
+            x: {
+                ticks: {
+                    color:
+                        themeMode === "dark"
+                            ? "rgb(255, 255, 255, 0.5)"
+                            : "rgba(0, 0, 0, 0.5)",
+                    font: {
+                        size: 10,
+                    },
+                },
+                grid: {
+                    display: false,
+                    drawTicks: false,
+                },
+                min: 0,
+                border: {
+                    color:
+                        themeMode === "dark"
+                            ? "rgb(255, 255, 255, 0.5)"
+                            : "rgba(0, 0, 0, 0.5)",
+                },
+            },
+            y: {
+                ticks: {
+                    color:
+                        themeMode === "dark"
+                            ? "rgb(255, 255, 255, 0.5)"
+                            : "rgba(0, 0, 0, 0.5)",
+                    font: {
+                        size: 12,
+                    },
+                },
+                grid: {
+                    color:
+                        themeMode === "dark"
+                            ? "rgb(255, 255, 255, 0.5)"
+                            : "rgba(0, 0, 0, 0.5)",
+                    drawTicks: false,
+                    lineWidth: 0.5,
+                },
+                min: 0,
+                border: {
+                    color:
+                        themeMode === "dark"
+                            ? "rgb(255, 255, 255, 0.5)"
+                            : "rgba(0, 0, 0, 0.5)",
+                },
+            },
+        },
+    };
+    return options;
+}
