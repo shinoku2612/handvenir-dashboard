@@ -33,7 +33,11 @@ const getCategories = async (url: string): Promise<Category[]> => {
 function DashboardChart({ data }: { data: Array<DashBoardChartData> }) {
     const themeMode = useStore(usePersistStore, (state) => state.themeMode);
     const themColor = useStore(usePersistStore, (state) => state.themeColor);
-    const { data: categories } = useSWR("/api/category", getCategories);
+    const { data: categories, isLoading } = useSWR(
+        "/api/category",
+        getCategories,
+    );
+    if (isLoading) return null;
     return (
         <div className="flex gap-10 flex-wrap justify-center">
             <div

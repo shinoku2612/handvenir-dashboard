@@ -14,12 +14,11 @@ import {
 } from "@/services/dashboard.service";
 
 export default async function DashBoard() {
-    const productCount: number = await getProductCount();
     const categorySale: Array<DashBoardChartData> = await getProductSale();
-    const userCount: number = await getUserCount();
-    const sales: number = await getSaleCount();
-    const earning: number = await getEarningCount();
-
+    // const productCount: number = await getProductCount();
+    // const userCount: number = await getUserCount();
+    // const saleCount: number = await getSaleCount();
+    // const earning: number = await getEarningCount();
     return (
         <div>
             <div className="flex flex-wrap lg:flex-nowrap justify-center">
@@ -32,9 +31,7 @@ export default async function DashBoard() {
                     <div className="flex justify-between items-center">
                         <div className="">
                             <p className="font-bold text-gray-400">Earnings</p>
-                            <p className="text-2xl text-shadow-sm">
-                                ${earning}
-                            </p>
+                            <p className="text-2xl text-shadow-sm">${0}</p>
                         </div>
                     </div>
                 </div>
@@ -43,7 +40,7 @@ export default async function DashBoard() {
                         color="#03C9D7"
                         backgroundColor="#E5FAFB"
                         Icon={MdOutlineSupervisorAccount}
-                        amount={userCount}
+                        amount={0}
                         type="increased"
                         label="Users"
                     />
@@ -51,7 +48,7 @@ export default async function DashBoard() {
                         color="rgb(255, 244, 229)"
                         backgroundColor="rgb(254, 201, 15)"
                         Icon={BsBoxSeam}
-                        amount={productCount}
+                        amount={0}
                         type="decreased"
                         label="Product Types"
                     />
@@ -59,13 +56,13 @@ export default async function DashBoard() {
                         color="rgb(228, 106, 118)"
                         backgroundColor="rgb(255, 244, 229)"
                         Icon={FiBarChart}
-                        amount={sales}
+                        amount={0}
                         type="increased"
                         label="Sales"
                     />
                 </div>
             </div>
-            {/* <DashboardChart data={categorySale} /> */}
+            <DashboardChart data={categorySale} />
         </div>
     );
 }
