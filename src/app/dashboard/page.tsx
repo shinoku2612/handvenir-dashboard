@@ -4,7 +4,6 @@ import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { FiBarChart } from "react-icons/fi";
 import Widget from "@/components/Widget";
 import DashboardChart from "../_private/DashboardChart";
-import { DashBoardChartData } from "@/models/props.model";
 import {
     getEarningCount,
     getProductCount,
@@ -14,7 +13,7 @@ import {
 } from "@/services/dashboard.service";
 
 export default async function DashBoard() {
-    const [categorySale, productCount, userCount, saleCount, earningCount] =
+    const [categorySale, productCount, userCount, saleCount, earning] =
         await Promise.all([
             getProductSale(),
             getProductCount(),
@@ -35,7 +34,7 @@ export default async function DashBoard() {
                         <div className="">
                             <p className="font-bold text-gray-400">Earnings</p>
                             <p className="text-2xl text-shadow-sm">
-                                {`$${earningCount}`}
+                                ${earning}
                             </p>
                         </div>
                     </div>
