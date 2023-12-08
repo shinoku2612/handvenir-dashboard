@@ -20,6 +20,7 @@ export default async function DashBoard() {
     const userCount: number = await getUserCount();
     const sales: number = await getSaleCount();
     const earning: number = await getEarningCount();
+
     return (
         <div>
             <div className="flex flex-wrap lg:flex-nowrap justify-center">

@@ -15,28 +15,30 @@ export default async function User({
 }: {
     searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<React.ReactElement> {
-    const response = await fetch(`${process.env.APP_DOMAIN}/api/user/`, {
+    const disableId = searchParams.disable || "";
+    const enableId = searchParams.enable || "";
+    const response = await fetch(`${process.env.APP_DOMAIN}/api/user`, {
         cache: "no-store",
     });
     const users: Array<User> = await response.json();
     return (
         <div className="m-2 mt-16 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-            {searchParams.disable ? (
+            {disableId ? (
                 <ConfirmModal
                     message="Are you sure you want to disable this user?"
                     originUrl="/user"
-                    requestUrl={`${process.env.APP_DOMAIN}/api/user?disable=${searchParams.disable}`}
+                    requestUrl={`${process.env.APP_DOMAIN}/api/user?disable=${disableId}`}
                     redirectUrl="/user"
                     options={{
                         method: "PATCH",
                         cache: "no-store",
                     }}
                 />
-            ) : searchParams.enable ? (
+            ) : enableId ? (
                 <ConfirmModal
                     message="Are you sure you want to enable this user?"
                     originUrl="/user"
-                    requestUrl={`${process.env.APP_DOMAIN}/api/user?enable=${searchParams.enable}`}
+                    requestUrl={`${process.env.APP_DOMAIN}/api/user?enable=${enableId}`}
                     redirectUrl="/user"
                     options={{
                         method: "PATCH",

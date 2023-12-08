@@ -8,6 +8,12 @@ export async function GET(
 ) {
     try {
         const categoryId: string = params.id;
+        if (!categoryId) {
+            return NextResponse.json(
+                { message: "Invalid category Id" },
+                { status: 500 },
+            );
+        }
         const category = await CategoryModel.findById(categoryId);
         return NextResponse.json(category, { status: 200 });
     } catch (error) {

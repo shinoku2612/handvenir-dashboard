@@ -14,6 +14,7 @@ export default async function Category({
 }: {
     searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<React.ReactElement> {
+    const categoryId = searchParams.category || "";
     const response = await fetch(`${process.env.APP_DOMAIN}/api/category`);
     const categories: Array<Category> = await response.json();
     return (
@@ -28,12 +29,10 @@ export default async function Category({
                         key={category._id}
                         href={`/category?category=${category._id}`}
                         className={classNames({
-                            "active-link":
-                                category._id === searchParams.category,
-                            "normal-link":
-                                category._id !== searchParams.category,
+                            "active-link": category._id === categoryId,
+                            "normal-link": category._id !== categoryId,
                         })}
-                        active={category._id === searchParams.category}
+                        active={category._id === categoryId}
                     >
                         {category.name}
                     </ClientLink>

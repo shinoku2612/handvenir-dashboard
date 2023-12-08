@@ -11,8 +11,9 @@ export default async function CategoryDetail({
 }: {
     searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<React.ReactElement> {
-    const categoryId = searchParams.category;
-    const isDelete = searchParams.delete;
+    const categoryId = searchParams.category || "";
+    const isDelete = searchParams.delete || "";
+    console.log(`${process.env.APP_DOMAIN}/api/category/${categoryId}`);
     const response = await fetch(
         `${process.env.APP_DOMAIN}/api/category/${categoryId}`,
     );
