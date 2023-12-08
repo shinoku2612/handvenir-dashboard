@@ -14,6 +14,7 @@ import { Category } from "@/models/entity.model";
 import { useStore } from "zustand";
 import { usePersistStore } from "@/stores";
 import { getLineChartOptions } from "@/utils/helper";
+import { DashBoardChartData } from "@/models/props.model";
 
 ChartJS.register(
     CategoryScale,
@@ -29,11 +30,7 @@ const getCategories = async (url: string): Promise<Category[]> => {
     return data;
 };
 
-function DashboardChart({
-    data,
-}: {
-    data: Array<{ _id: string; count: number }>;
-}) {
+function DashboardChart({ data }: { data: Array<DashBoardChartData> }) {
     const themeMode = useStore(usePersistStore, (state) => state.themeMode);
     const themColor = useStore(usePersistStore, (state) => state.themeColor);
     const { data: categories, isLoading } = useSWR(
@@ -49,11 +46,11 @@ function DashboardChart({
                 m-3 p-4 rounded-2xl md:w-780"
             >
                 <div className="flex justify-between">
-                    <p className="font-semibold text-xl text-shadow-sm">
+                    <p className="font-semibold text-lg text-shadow-sm uppercase">
                         Product sales by category
                     </p>
                 </div>
-                <div className="mt-10 flex gap-10 flex-wrap justify-center">
+                <div className="mt-3 flex gap-10 flex-wrap justify-center">
                     <Line
                         options={getLineChartOptions(themeMode)}
                         data={{

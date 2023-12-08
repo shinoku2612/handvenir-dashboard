@@ -42,3 +42,7 @@ export interface ConfirmModalProps {
     redirectUrl: string;
     options?: RequestInit;
 }
+export interface DashBoardChartData {
+    _id: string;
+    count: number;
+}

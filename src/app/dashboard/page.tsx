@@ -5,6 +5,7 @@ import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { FiBarChart } from "react-icons/fi";
 import Widget from "@/components/Widget";
 import DashboardChart from "../_private/DashboardChart";
+import { DashBoardChartData } from "@/models/props.model";
 
 export default async function DashBoard() {
     const statisticsFetcher = (endpoints: Array<string>) => {
@@ -37,7 +38,9 @@ export default async function DashBoard() {
                     <div className="flex justify-between items-center">
                         <div className="">
                             <p className="font-bold text-gray-400">Earnings</p>
-                            <p className="text-2xl text-shadow-sm">${earning}</p>
+                            <p className="text-2xl text-shadow-sm">
+                                ${earning}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -68,7 +71,7 @@ export default async function DashBoard() {
                     />
                 </div>
             </div>
-            <DashboardChart data={categorySale} />
+            <DashboardChart data={categorySale as Array<DashBoardChartData>} />
         </div>
     );
 }
