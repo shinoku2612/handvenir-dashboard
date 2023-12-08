@@ -11,7 +11,6 @@ export async function getProductCount(): Promise<number> {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log(error);
         return 0;
     }
 }
@@ -26,7 +25,6 @@ export async function getProductSale(): Promise<Array<DashBoardChartData>> {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log(error);
         return [];
     }
 }
@@ -41,7 +39,6 @@ export async function getUserCount(): Promise<number> {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log(error);
         return 0;
     }
 }
@@ -56,7 +53,6 @@ export async function getSaleCount(): Promise<number> {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log(error);
         return 0;
     }
 }
@@ -71,7 +67,6 @@ export async function getEarningCount(): Promise<number> {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log(error);
         return 0;
     }
 }
