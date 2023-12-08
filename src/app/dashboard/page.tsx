@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import React from "react";
 import { BsBoxSeam } from "react-icons/bs";
 import { MdOutlineSupervisorAccount } from "react-icons/md";
@@ -34,7 +33,7 @@ export default async function DashBoard() {
                         <div className="">
                             <p className="font-bold text-gray-400">Earnings</p>
                             <p className="text-2xl text-shadow-sm">
-                                $123
+                                ${earning}
                             </p>
                         </div>
                     </div>
@@ -44,7 +43,7 @@ export default async function DashBoard() {
                         color="#03C9D7"
                         backgroundColor="#E5FAFB"
                         Icon={MdOutlineSupervisorAccount}
-                        amount={123}
+                        amount={userCount}
                         type="increased"
                         label="Users"
                     />
@@ -52,7 +51,7 @@ export default async function DashBoard() {
                         color="rgb(255, 244, 229)"
                         backgroundColor="rgb(254, 201, 15)"
                         Icon={BsBoxSeam}
-                        amount={123}
+                        amount={productCount}
                         type="decreased"
                         label="Product Types"
                     />
@@ -60,7 +59,7 @@ export default async function DashBoard() {
                         color="rgb(228, 106, 118)"
                         backgroundColor="rgb(255, 244, 229)"
                         Icon={FiBarChart}
-                        amount={123}
+                        amount={sales}
                         type="increased"
                         label="Sales"
                     />
