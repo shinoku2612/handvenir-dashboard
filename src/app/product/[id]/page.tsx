@@ -4,17 +4,8 @@ import { Category, Product } from "@/models/entity.model";
 import ImagePreview from "@/components/ImagePreview";
 import Loader from "@/components/Loader";
 import { redirect } from "next/navigation";
-
-const getCategories = async (url: string): Promise<Category[]> => {
-    const response = await fetch(url, { cache: "no-store" });
-    const data = await response.json();
-    return data;
-};
-const getProduct = async (url: string): Promise<Product> => {
-    const response = await fetch(url, { cache: "no-store" });
-    const data = await response.json();
-    return data;
-};
+import { getAllCategories } from "@/services/category.service";
+import { getProductDetail } from "@/services/product.service";
 
 export default async function SingleProduct({
     params,
@@ -24,10 +15,7 @@ export default async function SingleProduct({
     const productId = params.id;
 
     const [product, categories]: [Product, Array<Category>] = await Promise.all(
-        [
-            getProduct(`${process.env.APP_DOMAIN}/api/product/${productId}`),
-            await getCategories(`${process.env.APP_DOMAIN}/api/category`),
-        ],
+        [getProductDetail(productId), getAllCategories()],
     );
 
     async function handleUpdateProduct(formData: FormData) {

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
 import ProductRow from "@/app/_private/ProductRow";
 import ConfirmModal from "@/components/ConfirmModal";
+import { getAllProducts } from "@/services/product.service";
 
 export default async function Product({
     searchParams,
@@ -14,8 +15,7 @@ export default async function Product({
     searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<React.ReactElement> {
     const deleteId = searchParams.delete;
-    const response = await fetch(`${process.env.APP_DOMAIN}/api/product`);
-    const products: Array<Product> = await response.json();
+    const products: Array<Product> = await getAllProducts();
 
     return (
         <div className="m-2 mt-16 md:m-10 md:mt-7 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">

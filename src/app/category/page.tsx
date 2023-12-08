@@ -1,6 +1,7 @@
 import ClientLink from "@/components/ClientLink";
 import Header from "@/components/Header";
 import { Category } from "@/models/entity.model";
+import { getAllCategories } from "@/services/category.service";
 import { classNames } from "@/utils/helper";
 import { Metadata } from "next";
 import React from "react";
@@ -15,8 +16,7 @@ export default async function Category({
     searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<React.ReactElement> {
     const categoryId = searchParams.category || "";
-    const response = await fetch(`${process.env.APP_DOMAIN}/api/category`);
-    const categories: Array<Category> = await response.json();
+    const categories: Array<Category> = await getAllCategories();
     return (
         <div className="border-r-1 col-start-1 col-end-2">
             <Header

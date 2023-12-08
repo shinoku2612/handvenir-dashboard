@@ -2,6 +2,7 @@ import CategoryControl from "@/app/_private/CategoryControl";
 import ConfirmModal from "@/components/ConfirmModal";
 import Header from "@/components/Header";
 import { Category } from "@/models/entity.model";
+import { getCategoryDetail } from "@/services/category.service";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -13,11 +14,7 @@ export default async function CategoryDetail({
 }): Promise<React.ReactElement> {
     const categoryId = searchParams.category || "";
     const isDelete = searchParams.delete || "";
-    console.log(`${process.env.APP_DOMAIN}/api/category/${categoryId}`);
-    const response = await fetch(
-        `${process.env.APP_DOMAIN}/api/category/${categoryId}`,
-    );
-    const category: Category = await response.json();
+    const category: Category = await getCategoryDetail(categoryId as string);
 
     async function handleSubmitForm(formData: FormData) {
         "use server";
