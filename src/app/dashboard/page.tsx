@@ -17,6 +17,7 @@ export default async function DashBoard() {
         `${process.env.APP_DOMAIN}/api/statistic/earning`,
         {
             cache: "no-store",
+            next: { revalidate: 0 },
         },
     );
     const earning = await response.json();
