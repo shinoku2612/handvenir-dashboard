@@ -66,7 +66,7 @@ export default async function DashBoard() {
                     />
                 </div>
             </div>
-            <DashboardChart data={categorySale} />
+            <DashboardChart />
         </div>
     );
 }
