@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
 // GET User count
 export async function GET(request: NextRequest) {
     try {
-        const productCount = await UserModel.find().count();
+        const productCount = await UserModel.find();
         return NextResponse.json(productCount, { status: 200 });
     } catch (error) {
         return NextResponse.json(error, { status: 500 });
