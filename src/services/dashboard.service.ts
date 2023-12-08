@@ -8,8 +8,8 @@ export async function getProductCount(): Promise<number> {
                 cache: "no-store",
             },
         );
-        const data = await response.json();
-        return data;
+        const productCount: number = await response.json();
+        return productCount;
     } catch (error) {
         return 0;
     }
@@ -22,10 +22,10 @@ export async function getProductSale(): Promise<Array<DashBoardChartData>> {
                 cache: "no-store",
             },
         );
-        const data = await response.json();
-        return data;
+        const productSale: Array<DashBoardChartData> = await response.json();
+        return productSale;
     } catch (error) {
-        return [];
+        return [{ _id: "", count: 0 }];
     }
 }
 export async function getUserCount(): Promise<number> {
@@ -36,8 +36,8 @@ export async function getUserCount(): Promise<number> {
                 cache: "no-store",
             },
         );
-        const data = await response.json();
-        return data;
+        const userCount: number = await response.json();
+        return userCount;
     } catch (error) {
         return 0;
     }
@@ -50,8 +50,8 @@ export async function getSaleCount(): Promise<number> {
                 cache: "no-store",
             },
         );
-        const data = await response.json();
-        return data;
+        const saleCount: number = await response.json();
+        return saleCount;
     } catch (error) {
         return 0;
     }
@@ -64,8 +64,8 @@ export async function getEarningCount(): Promise<number> {
                 cache: "no-store",
             },
         );
-        const data = await response.json();
-        return data;
+        const earningCount: number = await response.json();
+        return earningCount;
     } catch (error) {
         return 0;
     }
