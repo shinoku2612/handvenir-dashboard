@@ -13,7 +13,13 @@ import {
 } from "@/services/dashboard.service";
 
 export default async function DashBoard() {
-    const earning = await getEarningCount();
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/statistic/earning`,
+        {
+            cache: "no-store",
+        },
+    );
+    const earning = await response.json();
     // const [categorySale, productCount, userCount, saleCount] =
     //     await Promise.all([
     //         getProductSale(),
