@@ -13,13 +13,13 @@ import {
 } from "@/services/dashboard.service";
 
 export default async function DashBoard() {
-    const [categorySale, productCount, userCount, saleCount, earning] =
+    const earning = await getEarningCount();
+    const [categorySale, productCount, userCount, saleCount] =
         await Promise.all([
             getProductSale(),
             getProductCount(),
             getUserCount(),
             getSaleCount(),
-            getEarningCount(),
         ]);
     return (
         <div>
