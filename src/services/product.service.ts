@@ -2,7 +2,9 @@ import { Product } from "@/models/entity.model";
 
 export async function getAllProducts(): Promise<Array<Product>> {
     try {
-        const response = await fetch(`${process.env.APP_DOMAIN}/api/product`);
+        const response = await fetch(`${process.env.APP_DOMAIN}/api/product`, {
+            cache: "no-store",
+        });
         const products: Array<Product> = await response.json();
         return products;
     } catch (error) {

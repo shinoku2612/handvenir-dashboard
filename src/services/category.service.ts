@@ -19,7 +19,9 @@ export async function getCategoryDetail(categoryId: string): Promise<Category> {
 
 export async function getAllCategories(): Promise<Array<Category>> {
     try {
-        const response = await fetch(`${process.env.APP_DOMAIN}/api/category`);
+        const response = await fetch(`${process.env.APP_DOMAIN}/api/category`, {
+            cache: "no-store",
+        });
         const category: Array<Category> = await response.json();
         return category;
     } catch (error) {
