@@ -5,7 +5,7 @@ export async function getProductCount(): Promise<number> {
         const response = await fetch(
             `${process.env.APP_DOMAIN}/api/statistics/product/count`,
             {
-                cache: "no-store",
+                cache: "no-cache",
             },
         );
         const data = await response.json();
@@ -19,7 +19,7 @@ export async function getProductSale(): Promise<Array<DashBoardChartData>> {
         const response = await fetch(
             `${process.env.APP_DOMAIN}/api/statistics/product/sale`,
             {
-                cache: "no-store",
+                cache: "no-cache",
             },
         );
         const data = await response.json();
@@ -33,7 +33,7 @@ export async function getUserCount(): Promise<number> {
         const response = await fetch(
             `${process.env.APP_DOMAIN}/api/statistics/user`,
             {
-                cache: "no-store",
+                cache: "no-cache",
             },
         );
         const data = await response.json();
@@ -47,7 +47,7 @@ export async function getSaleCount(): Promise<number> {
         const response = await fetch(
             `${process.env.APP_DOMAIN}/api/statistics/sale`,
             {
-                cache: "no-store",
+                cache: "no-cache",
             },
         );
         const data = await response.json();
@@ -61,7 +61,7 @@ export async function getEarningCount(): Promise<number> {
         const response = await fetch(
             `${process.env.APP_DOMAIN}/api/statistics/earning`,
             {
-                cache: "no-store",
+                cache: "no-cache",
             },
         );
         const data = await response.json();
