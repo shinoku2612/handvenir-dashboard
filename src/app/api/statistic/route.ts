@@ -1,6 +1,6 @@
 import OrderModel from "@/databases/order.model";
 import { NextRequest, NextResponse } from "next/server";
-
+export const fetchCache = "force-no-store";
 export async function GET(request: NextRequest) {
     try {
         const result = await OrderModel.aggregate([
