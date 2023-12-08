@@ -6,26 +6,20 @@ import { FiBarChart } from "react-icons/fi";
 import Widget from "@/components/Widget";
 import DashboardChart from "../_private/DashboardChart";
 import { DashBoardChartData } from "@/models/props.model";
+import {
+    getEarningCount,
+    getProductCount,
+    getProductSale,
+    getSaleCount,
+    getUserCount,
+} from "@/services/dashboard.service";
 
 export default async function DashBoard() {
-    const statisticsFetcher = (endpoints: Array<string>) => {
-        return endpoints.map((endpoint) =>
-            fetch(`${process.env.APP_DOMAIN}/api/${endpoint}`, {
-                cache: "no-store",
-            }),
-        );
-    };
-    const statisticResponse = await Promise.all(
-        statisticsFetcher([
-            "/statistics/product/count",
-            "/statistics/product/sale",
-            "/statistics/user",
-            "/statistics/sale",
-            "/statistics/earning",
-        ]),
-    );
-    const [productCount, categorySale, userCount, sales, earning] =
-        await Promise.all(statisticResponse.map((response) => response.json()));
+    const productCount: number = await getProductCount();
+    const categorySale: Array<DashBoardChartData> = await getProductSale();
+    const userCount: number = await getUserCount();
+    const sales: number = await getSaleCount();
+    const earning: number = await getEarningCount();
     return (
         <div>
             <div className="flex flex-wrap lg:flex-nowrap justify-center">
@@ -71,7 +65,7 @@ export default async function DashBoard() {
                     />
                 </div>
             </div>
-            <DashboardChart data={categorySale as Array<DashBoardChartData>} />
+            <DashboardChart data={categorySale} />
         </div>
     );
 }
