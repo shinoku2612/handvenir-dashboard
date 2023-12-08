@@ -34,7 +34,7 @@ export default async function DashBoard() {
                         <div className="">
                             <p className="font-bold text-gray-400">Earnings</p>
                             <p className="text-2xl text-shadow-sm">
-                                ${earning}
+                                $123
                             </p>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ export default async function DashBoard() {
                         color="#03C9D7"
                         backgroundColor="#E5FAFB"
                         Icon={MdOutlineSupervisorAccount}
-                        amount={userCount}
+                        amount={123}
                         type="increased"
                         label="Users"
                     />
@@ -52,7 +52,7 @@ export default async function DashBoard() {
                         color="rgb(255, 244, 229)"
                         backgroundColor="rgb(254, 201, 15)"
                         Icon={BsBoxSeam}
-                        amount={productCount}
+                        amount={123}
                         type="decreased"
                         label="Product Types"
                     />
@@ -60,13 +60,13 @@ export default async function DashBoard() {
                         color="rgb(228, 106, 118)"
                         backgroundColor="rgb(255, 244, 229)"
                         Icon={FiBarChart}
-                        amount={sales}
+                        amount={123}
                         type="increased"
                         label="Sales"
                     />
                 </div>
             </div>
-            <DashboardChart />
+            {/* <DashboardChart data={categorySale} /> */}
         </div>
     );
 }
