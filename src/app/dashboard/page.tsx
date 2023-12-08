@@ -35,7 +35,7 @@ export default async function DashBoard() {
                         <div className="">
                             <p className="font-bold text-gray-400">Earnings</p>
                             <p className="text-2xl text-shadow-sm">
-                                ${earning}
+                                ${0}
                             </p>
                         </div>
                     </div>
