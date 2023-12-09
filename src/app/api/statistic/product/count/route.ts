@@ -7,7 +7,9 @@ export async function GET(request: NextRequest) {
         const productCount = await ProductModel.find().count();
         return NextResponse.json(productCount, { status: 200 });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         return NextResponse.json(error, { status: 500 });
     }
 }
+
+export async function POST(request: NextRequest) {}

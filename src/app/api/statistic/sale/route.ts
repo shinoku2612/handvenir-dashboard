@@ -22,3 +22,5 @@ export async function GET(request: NextRequest) {
         return NextResponse.json(error, { status: 500 });
     }
 }
+
+export async function POST(request: NextRequest) {}
